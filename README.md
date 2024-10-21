@@ -142,7 +142,7 @@ git push
 ```
 - Create a [PR](https://help.github.com/en/github/collaborating-with-issues-and-pull-requests/creating-a-pull-request)  which will be promptly reviewed and suggestions would be added to improve it.
 - Add Screenshots to help us know what this Script is all about.
-- Congratulations! 🎉 Sit and relax, you've made your contribution to [recipe-app](https://github.com/iamrahulmahato/recipe-app) project.
+- Congratulations! 🎉 Sit and relax, you've made your contribution to [recipe-app]([https://recipe-app-lilac-five.vercel.app/]) project.
 
 * Tip : Complete this process in GitHub (in your browser)
 
