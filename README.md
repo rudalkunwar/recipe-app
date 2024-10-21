@@ -22,7 +22,7 @@ Follow these steps to get the app running locally:
 
 1. **Clone the repository**:
    ```bash
-   git clone https://github.com/yourusername/recipe-app.git
+   git clone https://github.com/rudalkunwar/recipe-app.git
    ```
 
 2. **Navigate to the project directory**:
