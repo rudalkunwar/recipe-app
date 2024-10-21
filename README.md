@@ -103,10 +103,10 @@ Refer to the following articles on the basics of Git and Github in case you are 
 
 </div>
 
-- Take a look at the Existing [Issues](https://github.com/iamrahulmahato/recipe-app/issues) or create your own Issues!
+- Take a look at the Existing [Issues](https://github.com/rudalkunwar/recipe-app/issues) or create your own Issues!
 - Wait for the Issue to be assigned to you after which you can start working on it.
-- Fork [this](https://github.com/iamrahulmahato/recipe-app) repository.
-Click on the <a href="https://github.com/iamrahulmahato/recipe-app"><img src="./assets/image/git-fork_1.png" height="20" width="20"></a> symbol at the top right corner.
+- Fork [this](https://github.com/rudalkunwar/recipe-app) repository.
+Click on the <a href="https://github.com/rudalkunwar/recipe-app"><img src="./assets/image/git-fork_1.png" height="20" width="20"></a> symbol at the top right corner.
 - Clone the forked repository.
 
 ```bash
