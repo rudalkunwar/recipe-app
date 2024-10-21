@@ -100,21 +100,22 @@ Refer to the following articles on the basics of Git and Github in case you are 
 
 
 
+
 </div>
 
-- Take a look at the Existing [Issues](https://github.com/iamrahulmahato/master-web-development/issues) or create your own Issues!
+- Take a look at the Existing [Issues](https://github.com/iamrahulmahato/recipe-app/issues) or create your own Issues!
 - Wait for the Issue to be assigned to you after which you can start working on it.
-- Fork [this](https://github.com/iamrahulmahato/master-web-development) repository.
-Click on the <a href="https://github.com/iamrahulmahato/master-web-development"><img src="./assets/image/git-fork_1.png" height="20" width="20"></a> symbol at the top right corner.
+- Fork [this](https://github.com/iamrahulmahato/recipe-app) repository.
+Click on the <a href="https://github.com/iamrahulmahato/recipe-app"><img src="./assets/image/git-fork_1.png" height="20" width="20"></a> symbol at the top right corner.
 - Clone the forked repository.
 
 ```bash
-git clone https://github.com/<your-github-username>/master-web-development
+git clone https://github.com/<your-github-username>/recipe-app
 ```
 - Navigate to the project directory.
 
 ```bash
-cd master-web-development
+cd recipe-app
 ```
 <p>
   
@@ -141,7 +142,7 @@ git push
 ```
 - Create a [PR](https://help.github.com/en/github/collaborating-with-issues-and-pull-requests/creating-a-pull-request)  which will be promptly reviewed and suggestions would be added to improve it.
 - Add Screenshots to help us know what this Script is all about.
-- Congratulations! 🎉 Sit and relax, you've made your contribution to [master-web-development](https://github.com/iamrahulmahato/master-web-development) project.
+- Congratulations! 🎉 Sit and relax, you've made your contribution to [recipe-app](https://github.com/iamrahulmahato/recipe-app) project.
 
 * Tip : Complete this process in GitHub (in your browser)
 
