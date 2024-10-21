@@ -80,11 +80,6 @@ We are participating in **Hacktoberfest 2024**! Feel free to contribute by check
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## 🌐 Connect With Us
-
-* **GitHub**: [yourusername](https://github.com/yourusername)
-* **Website**: [recipeapp.com](https://recipeapp.com) (If applicable)
-
 Happy Cooking! 🍳👩‍🍳👨‍🍳
 
 ---
