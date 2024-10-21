@@ -110,7 +110,7 @@ Click on the <a href="https://github.com/rudalkunwar/recipe-app"><img src="./ass
 - Clone the forked repository.
 
 ```bash
-git clone https://github.com/<your-github-username>/recipe-app
+git clone https://github.com/rudalkunwar/recipe-app
 ```
 - Navigate to the project directory.
 
