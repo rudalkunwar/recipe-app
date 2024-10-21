@@ -1,0 +1,35 @@
+.work{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    z-index: 40;
+}
+.top-btn{
+    position: fixed;
+    right: 28px;
+    bottom: 5%;
+    /* transition: all .4s; */
+    z-index: 10;
+    background-color: #3b82f6;
+    padding: 8px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.top-btn img{
+    width: 22px;
+}
+
+@media screen and (max-width:600px) {
+    .top-btn{
+        padding: 6px;
+        right: 20px;
+    }
+    .top-btn img{
+        width: 20px;
+    }
+}
