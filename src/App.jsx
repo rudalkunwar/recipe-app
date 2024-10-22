@@ -1,10 +1,12 @@
 import React from "react";
 import Home from "./pages/Home";
+import Navbar from "./components/nav/Navbar";
 
 function App() {
-  return <div >
+  return < >
+    <Navbar />
     <Home />
-  </div>;
+  </>;
 }
 
 export default App;
