@@ -33,7 +33,7 @@ function Home() {
       </div>
 
       {/* Small Banner Section */}
-      <div className="bg-gradient-to-r from-blue-500 to-teal-500 text-white py-4">
+      <div className="absolute z-20 bottom-0 w-full bg-gradient-to-r from-blue-500 to-teal-500 text-white py-4">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <p className="text-sm font-medium">
             Unlock a World of Flavor: Discover New Recipes Every Day!
