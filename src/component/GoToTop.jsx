@@ -26,13 +26,13 @@ const GoToTop = () => {
     }, []);
 
     return (
-        <div className="work">
-        {isVisible && (
-        <button className="top-btn" onClick={goToBtn}>
-          <img src="/arrowUp.png" alt="arrow" />
-        </button>
-      )}
-        </div>
+      <div className="work flex justify-center items-center relative z-40">
+  {isVisible && (
+    <button className="top-btn fixed right-5 bottom-[5%] z-10 bg-blue-500 p-1.5 sm:p-2 sm:right-7 rounded-full cursor-pointer flex justify-center items-center" onClick={goToBtn}>
+      <img src="/arrowUp.png" alt="arrow" className="w-5 sm:w-6" />
+    </button>
+  )}
+</div>
     )
 };
 
