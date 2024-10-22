@@ -1,4 +1,5 @@
 import React from 'react';
+import GoToTop from '../component/GoToTop';
 
 function Home() {
   return (
@@ -121,6 +122,7 @@ function Home() {
           <p className="text-center text-sm">© 2024 RecipeApp. All rights reserved.</p>
         </div>
       </footer>
+      <GoToTop/>
     </div>
   );
 }
