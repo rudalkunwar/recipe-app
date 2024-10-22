@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import "./goTop.css";
 const GoToTop = () => {
     const [isVisible, setIsVisible] = useState(false);
   
