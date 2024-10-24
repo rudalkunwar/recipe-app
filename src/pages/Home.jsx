@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 function Home() {
   return (
@@ -14,12 +15,7 @@ function Home() {
               Discover a world of delicious recipes at your fingertips. Find your next favorite dish now!
             </p>
             <div className="mt-8 flex justify-center">
-              <a
-                href="#explore"
-                className="inline-block px-6 py-3 border border-transparent text-base font-medium rounded-md text-gray-800 bg-white hover:bg-gray-100 transition duration-200"
-              >
-                Explore Recipes
-              </a>
+              <Link className="inline-block px-6 py-3 border border-transparent text-base font-medium rounded-md text-gray-800 bg-white hover:bg-gray-100 transition duration-200" to="/recipe">Search Recipes</Link>
             </div>
           </div>
         </div>
@@ -33,7 +29,7 @@ function Home() {
       </div>
 
       {/* Small Banner Section */}
-      <div className="absolute z-20 bottom-0 w-full bg-gradient-to-r from-blue-500 to-teal-500 text-white py-4">
+      <div className="absolute z-10 bottom-0 w-full bg-gradient-to-r from-blue-500 to-teal-500 text-white py-4">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <p className="text-sm font-medium">
             Unlock a World of Flavor: Discover New Recipes Every Day!
