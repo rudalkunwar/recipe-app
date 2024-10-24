@@ -1,0 +1,56 @@
+Rudal Kunwar
+Full Stack Developer
+
+Bharatpur
++977 986 6115178
+
+Highly motivated full-stack developer with a passion for creating dynamic, user-friendly web applications. I have successfully developed and deployed multiple projects, including a movie streaming platform and an online bookstore, utilizing technologies like Laravel, React, and Tailwind CSS. My work is driven by a commitment to delivering scalable, high-performance solutions. With expertise in both frontend and backend, I excel in responsive design, API integration, and database management, always striving to improve user experience and system efficiency.
+
+PERSONAL INFORMATION
+  Address: , Bharatpur, 
+  Nationality: 
+  Driving License: 
+  Hobbies: 
+
+LANGUAGES
+
+SKILLS
+  HTML, CSS, JavaScript
+  Tailwind CSS
+  PHP
+  React
+  Laravel
+  Node.js
+  MySQL, MongoDB
+  Git
+
+EDUCATION
+  * April 2021 – Present
+    LUMBINI ICT CAMPUS, Gaindakot Bachelor of Computer Application
+
+    Currently pursuing BCA, an undergraduate program in computer science focused on application development.
+  * June 2019 – August 2020
+    NARAYANI ENGLISH PUBLIC SECONDARY SCHOOL, Bharatpur High School Education
+
+    Passed higher secondary school in the computer science faculty, achieving a notable CGPA of 3.44
+
+ONLINE PRESENCE
+  * Personal Website, , 
+
+    https://www.rudalkunwar.com.np
+  * Github, , 
+
+    https://github.com/rudalkunwar
+  * Linkedin, , 
+
+    https://www.linkedin.com/in/rudal-kunwar-4561bb260/
+PROJECTS
+  * The Garbage Complaint System, , 
+
+    The Garbage Complaint System is a web-based application developed using PHP and the Tailwind CSS framework. It is designed to streamline the process of managing garbage collection complaints, bin assignments, and user interactions
+  * Nflix, , 
+
+    Nflix is a sleek movie streaming site built with React, Axios, and Tailwind CSS. It features a modern, responsive design and dynamically fetches the latest movies and TV shows for an engaging user experience.
+  * Online Book Store, , 
+
+    An e-commerce application built with Laravel, offering secure user authentication, efficient book management, and a custom search algorithm. It features integrated payment gateways for safe transactions and a rating system to boost user engagement.
