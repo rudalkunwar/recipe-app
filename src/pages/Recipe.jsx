@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
 import axios from '../utils/axiosInstance';
+import { useNavigate } from 'react-router-dom';
 
 const Recipe = () => {
     const [mealName, setMealName] = useState('');
     const [recipes, setRecipes] = useState([]);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
+
+    const nav = useNavigate();
 
     const fetchRecipes = async () => {
         if (!mealName.trim()) {
@@ -90,7 +93,7 @@ const Recipe = () => {
                                     <p className="text-gray-600 line-clamp-3 mb-4">
                                         {meal.strInstructions}
                                     </p>
-                                    <button className="w-full py-2 px-4 bg-blue-50 text-blue-700 rounded-lg hover:bg-blue-100 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors duration-200">
+                                    <button onClick={() => nav(`/recipe/des/${meal.idMeal}`)} className="w-full py-2 px-4 bg-blue-50 text-blue-700 rounded-lg hover:bg-blue-100 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors duration-200">
                                         View Recipe
                                     </button>
                                 </div>
