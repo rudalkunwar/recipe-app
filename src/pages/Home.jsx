@@ -76,9 +76,39 @@ function Home() {
         </div>
       </div>
 
+
+{/* Call to Action Section */}
+<div className="relative text-black py-16 pt-0 flex my-20">
+<div className='ml-36' >
+    <img
+      src="/images/cookingillu.png"
+      alt="Food Background"
+      className="w-full h-96 object-cover  "
+    />
+  </div>
+  <div className="absolute inset-0  flex flex-col items-center justify-center text-center ml-80">
+    <h2 className="text-3xl font-extrabold">
+      Start Your Cooking Adventure Now!
+    </h2>
+    <p className="mt-4 text-6xl font-extrabold w-1/2">
+      Join RecipeApp and Explore culinary wonders.
+    </p>
+    <div className="mt-4">
+      <a
+        href="#"
+        className="inline-block px-8 py-3 text-yellow-400 rounded-md text-6xl font-extrabold hover:text-yellow-600 transition duration-200"
+      >
+        Explore
+      </a>
+    </div>
+  </div>
+  
+</div>
+            
+
       {/* Share Your Recipe Banner */}
-      <div className="bg-gradient-to-r from-blue-500 to-teal-500 py-8">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white">
+      <div className="py-8 flex ">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center mt-32  ">
           <h2 className="text-3xl font-extrabold">Share Your Recipe!</h2>
           <p className="mt-2 text-lg">
             Have a delicious recipe? Share it with our community and inspire others!
@@ -86,31 +116,20 @@ function Home() {
           <div className="mt-4">
             <a
               href="#"
-              className="inline-block px-6 py-2 border border-transparent text-base font-medium rounded-md bg-white text-gray-800 hover:bg-gray-100 transition duration-200"
+              className="inline-block  px-6 py-2 border border-transparent text-2xl font-medium rounded-md bg-white text-green-600 hover:bg-gray-100 hover:text-lime-500 transition duration-200"
             >
-              Submit Recipe
+              Submit Your Recipe
             </a>
           </div>
         </div>
+        <img
+      src="/images/shareRecipe.png"
+      alt="Food Background"
+      className="w-[500px] h-96 object-cover mr-32 "
+    />
       </div>
 
-      {/* Call to Action Section */}
-      <div className="bg-gray-800 py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl font-extrabold text-white">Start Your Cooking Adventure Now!</h2>
-          <p className="mt-4 text-lg text-gray-300">
-            Join RecipeApp today and explore a world of culinary wonders.
-          </p>
-          <div className="mt-8">
-            <a
-              href="#"
-              className="inline-block px-8 py-3 border border-transparent text-base font-medium rounded-md text-gray-800 bg-white hover:bg-gray-100 transition duration-200"
-            >
-              Get Started
-            </a>
-          </div>
-        </div>
-      </div>
+      
 
       {/* Footer Section */}
       <footer className="bg-gray-900 text-white py-6">
