@@ -178,8 +178,8 @@ Please note that Open Source Design has a [Contributor Code of Conduct](./CODE_O
 
 </div>
 
-<div>
-   ## Contributors ✨
+<div align="center">
+## 🤝 Contributing ✨
 Thanks to these wonderful people for their contributions:
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
