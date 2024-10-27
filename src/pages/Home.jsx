@@ -33,7 +33,7 @@ function Home() {
           />
           <div className="absolute inset-0 bg-gray-900/60 backdrop-blur-sm"></div>
         </div>
-        
+
         <div className="relative z-10 w-full">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white animate-fade-in">
@@ -65,7 +65,7 @@ function Home() {
               Explore our key features that make cooking fun and easy!
             </p>
           </div>
-          
+
           <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-8">
             {features.map((feature) => (
               <div
@@ -153,7 +153,7 @@ function Home() {
           <p className="text-sm">© 2024 RecipeApp. All rights reserved.</p>
         </div>
       </footer>
-      
+
       <GoToTop />
     </div>
   );
