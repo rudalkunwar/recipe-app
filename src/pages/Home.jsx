@@ -1,6 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import GoToTop from '../component/GoToTop';
+import Footer from "../components/nav/Footer";
+
 
 function Home() {
   return (
@@ -124,12 +126,12 @@ function Home() {
       Have a delicious recipe? Share it with our community and inspire others!
     </p>
     <div className="mt-4">
-      <a
+      <p
         href="#"
-        className="inline-block px-4 py-2 md:px-6 md:py-2 border border-transparent text-xl md:text-2xl font-medium rounded-md bg-white text-green-600 hover:bg-gray-100 hover:text-lime-500 transition duration-200"
+        className="inline-block px-4 py-2 hover:cursor-pointer md:px-6 md:py-2 border border-transparent text-xl md:text-2xl font-medium rounded-md bg-white text-green-600 hover:bg-gray-100 hover:text-lime-500 transition duration-200"
       >
         Submit Your Recipe
-      </a>
+      </p>
     </div>
   </div>
 
@@ -148,12 +150,7 @@ function Home() {
       
 
       {/* Footer Section */}
-      <footer className="bg-gray-900 text-white py-6">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <p className="text-center text-sm">© 2024 RecipeApp. All rights reserved.</p>
-        </div>
-      </footer>
-      <GoToTop/>
+      <Footer/>
     </div>
   );
 }
