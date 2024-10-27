@@ -3,95 +3,119 @@ import { FaHome, FaBook, FaInfoCircle, FaBars, FaTimes } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 
 function Navbar() {
-    const [visible, setVisible] = useState(true);
-    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-    let lastScrollY = 0;
+  const [visible, setVisible] = useState(true);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+  let lastScrollY = 0;
 
-    const handleScroll = () => {
-        if (typeof window !== 'undefined') {
-            const currentScrollY = window.scrollY;
+  const handleScroll = () => {
+    const currentScrollY = window.scrollY;
+    
+    // Update scroll visibility
+    if (currentScrollY > lastScrollY && currentScrollY > 50) {
+      setVisible(false);
+    } else {
+      setVisible(true);
+    }
+    
+    // Update background opacity
+    setIsScrolled(currentScrollY > 20);
+    lastScrollY = currentScrollY;
+  };
 
-            // Compare current scroll position with the last position
-            if (currentScrollY > lastScrollY) {
-                setVisible(false); // Scrolling down
-            } else {
-                setVisible(true); // Scrolling up
-            }
-            lastScrollY = currentScrollY;
-        }
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  // Close mobile menu on resize
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth >= 640) {
+        setIsMobileMenuOpen(false);
+      }
     };
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
-    const toggleMobileMenu = () => {
-        setIsMobileMenuOpen(!isMobileMenuOpen);
-    };
+  const navLinks = [
+    { icon: <FaHome className="text-xl" />, text: 'Home', path: '/' },
+    { icon: <FaBook className="text-xl" />, text: 'Recipe', path: '/recipe' },
+    { icon: <FaInfoCircle className="text-xl" />, text: 'About', path: '/about' }
+  ];
 
-    useEffect(() => {
-        window.addEventListener('scroll', handleScroll);
-        return () => {
-            window.removeEventListener('scroll', handleScroll);
-        };
-    }, []);
+  return (
+    <nav 
+      className={`
+        fixed w-full z-50 transition-all duration-300
+        ${visible ? 'translate-y-0' : '-translate-y-full'}
+        ${isScrolled ? 'bg-gray-900/95 backdrop-blur shadow-lg' : 'bg-gradient-to-b from-gray-900 to-transparent'}
+      `}
+    >
+      <div className="max-w-7xl mx-auto px-4 sm:px-6">
+        <div className="flex justify-between items-center h-16">
+          {/* Logo */}
+          <Link 
+            to="/" 
+            className="text-2xl font-bold text-white hover:text-blue-400 transition-all duration-200"
+          >
+            Recipe App
+          </Link>
 
-    return (
-        <nav className={`flex justify-between items-center py-4 px-6 fixed w-full z-20 transition-transform duration-300 ${visible ? 'translate-y-0' : '-translate-y-full'} bg-gradient-to-b from-gray-900 to-transparent backdrop-blur-sm`}>
-            {/* Logo Section */}
-            <div className="text-2xl font-bold text-white">
-                <Link className="flex items-center gap-2 p-2 rounded-lg transition-transform transform hover:scale-110" to="/">
-                    Recipe App
-                </Link>
-            </div>
+          {/* Desktop Menu */}
+          <div className="hidden sm:flex items-center space-x-8">
+            {navLinks.map(({ icon, text, path }) => (
+              <Link
+                key={path}
+                to={path}
+                className="flex items-center gap-2 text-white hover:text-blue-400 px-3 py-2 rounded-lg transition-all duration-200 hover:bg-white/10"
+              >
+                {icon}
+                <span>{text}</span>
+              </Link>
+            ))}
+          </div>
 
-            {/* Menu Section - For large screens */}
-            <ul className="hidden gap-8 text-white text-lg sm:flex">
-                <li>
-                    <Link className="flex items-center gap-2 hover:text-blue-300 p-2 rounded-lg transition-transform transform hover:scale-110" to="/">
-                        <FaHome className="text-xl" /> Home
-                    </Link>
-                </li>
-                <li>
-                    <Link className="flex items-center gap-2 hover:text-blue-300 p-2 rounded-lg transition-transform transform hover:scale-110" to="/recipe">
-                        <FaBook className="text-xl" /> Recipe
-                    </Link>
-                </li>
-                <li>
-                    <Link className="flex items-center gap-2 hover:text-blue-300 p-2 rounded-lg transition-transform transform hover:scale-110" to="/about">
-                        <FaInfoCircle className="text-xl" /> About
-                    </Link>
-                </li>
-            </ul>
-
-            {/* Hamburger Icon for Mobile */}
-            <div className="sm:hidden flex items-center">
-                <button
-                    onClick={toggleMobileMenu}
-                    className="text-white focus:outline-none transition-transform transform hover:scale-110"
-                >
-                    {isMobileMenuOpen ? <FaTimes className="text-2xl" /> : <FaBars className="text-2xl" />}
-                </button>
-            </div>
-
-            {/* Mobile Menu */}
-            {isMobileMenuOpen && (
-                <ul className="absolute top-full left-0 w-full bg-gray-900 text-white text-lg flex flex-col items-center sm:hidden z-10 py-4">
-                    <li className="w-full text-center py-2">
-                        <Link className="w-full block py-2 hover:bg-gray-700" to="/" onClick={toggleMobileMenu}>
-                            <FaHome className="inline text-xl mr-2" /> Home
-                        </Link>
-                    </li>
-                    <li className="w-full text-center py-2">
-                        <Link className="w-full block py-2 hover:bg-gray-700" to="/recipe" onClick={toggleMobileMenu}>
-                            <FaBook className="inline text-xl mr-2" /> Recipe
-                        </Link>
-                    </li>
-                    <li className="w-full text-center py-2">
-                        <Link className="w-full block py-2 hover:bg-gray-700" to="/about" onClick={toggleMobileMenu}>
-                            <FaInfoCircle className="inline text-xl mr-2" /> About
-                        </Link>
-                    </li>
-                </ul>
+          {/* Mobile Menu Button */}
+          <button
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            className="sm:hidden text-white p-2 rounded-lg hover:bg-white/10 transition-colors"
+            aria-label="Toggle menu"
+          >
+            {isMobileMenuOpen ? (
+              <FaTimes className="w-6 h-6" />
+            ) : (
+              <FaBars className="w-6 h-6" />
             )}
-        </nav>
-    );
+          </button>
+        </div>
+
+        {/* Mobile Menu */}
+        <div
+          className={`
+            sm:hidden transition-all duration-300 ease-in-out
+            ${isMobileMenuOpen ? 'max-h-screen pb-4' : 'max-h-0'}
+            overflow-hidden
+          `}
+        >
+          <div className="space-y-2 pt-2">
+            {navLinks.map(({ icon, text, path }) => (
+              <Link
+                key={path}
+                to={path}
+                className="flex items-center gap-3 text-white hover:text-blue-400 px-4 py-3 rounded-lg hover:bg-white/10 transition-all duration-200"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                {icon}
+                <span>{text}</span>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </div>
+    </nav>
+  );
 }
 
 export default Navbar;

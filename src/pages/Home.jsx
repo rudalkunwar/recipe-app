@@ -3,156 +3,157 @@ import { Link } from 'react-router-dom';
 import GoToTop from '../component/GoToTop';
 
 function Home() {
+  const features = [
+    {
+      imgSrc: "/api/placeholder/50/50",
+      title: "Search Recipes",
+      description: "Easily search for recipes based on ingredients or meal types."
+    },
+    {
+      imgSrc: "/api/placeholder/50/50",
+      title: "Save Favorites",
+      description: "Bookmark your favorite recipes for easy access anytime."
+    },
+    {
+      imgSrc: "/api/placeholder/50/50",
+      title: "Explore Cuisines",
+      description: "Discover new cuisines and exciting dishes from around the world."
+    }
+  ];
+
   return (
     <div className="bg-white">
       {/* Hero Section */}
-      <div className="h-screen relative bg-gray-800 text-white overflow-hidden">
-        <div className="relative z-10 flex flex-col justify-center items-center h-full py-16 sm:py-24 lg:py-32">
-          <div className="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
-            <h1 className="text-4xl font-extrabold sm:text-5xl lg:text-6xl animate-fade-in">
+      <div className="relative min-h-screen flex items-center">
+        <div className="absolute inset-0">
+          <img
+            src="/images/bg-home.jpeg"
+            alt="Food Background"
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-gray-900/60 backdrop-blur-sm"></div>
+        </div>
+        
+        <div className="relative z-10 w-full">
+          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white animate-fade-in">
               Welcome to RecipeApp
             </h1>
-            <p className="mt-4 text-lg leading-6 text-gray-300">
-              Discover a world of delicious recipes at your fingertips. Find your next favorite dish now!
+            <p className="mt-6 text-xl text-gray-200">
+              Discover a world of delicious recipes at your fingertips.
             </p>
-            <div className="mt-8 flex justify-center">
+            <div className="mt-8">
               <Link
-                className="inline-block px-6 py-3 border border-transparent text-base font-medium rounded-md text-gray-800 bg-white hover:bg-gray-100 transition duration-300 shadow-lg hover:shadow-2xl"
                 to="/recipe"
+                className="inline-block px-8 py-4 rounded-lg bg-white text-gray-900 text-lg font-medium hover:bg-gray-100 transition-all duration-200 transform hover:scale-105 hover:shadow-xl"
               >
-                Search Recipes
+                Explore Recipes
               </Link>
             </div>
           </div>
         </div>
-        <div className="absolute inset-0 z-0">
-          <img
-            src="/images/bg-home.jpeg"
-            alt="Food Background"
-            className="w-full h-full object-cover opacity-40"
-          />
-        </div>
-      </div>
-
-      {/* Small Banner Section */}
-      <div className="bg-gradient-to-r from-blue-500 to-teal-500 text-white py-4">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <p className="text-sm font-medium">
-            Unlock a World of Flavor: Discover New Recipes Every Day!
-            <a href="#" className="underline ml-2 hover:text-green-200">
-              Explore Now
-            </a>
-          </p>
-        </div>
       </div>
 
       {/* Features Section */}
-      <div id="explore" className="py-16 bg-gray-50">
+      <div className="py-16 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
-            <h2 className="text-3xl font-extrabold text-gray-900">Why Choose RecipeApp?</h2>
-            <p className="mt-4 text-lg leading-6 text-gray-600">
+            <h2 className="text-3xl font-extrabold text-gray-900">
+              Why Choose RecipeApp?
+            </h2>
+            <p className="mt-4 text-xl text-gray-600">
               Explore our key features that make cooking fun and easy!
             </p>
           </div>
-          <div className="mt-10 grid grid-cols-1 md:grid-cols-3 gap-8">
-            {[
-              {
-                imgSrc: "https://img.icons8.com/ios-filled/50/000000/search.png",
-                title: "Search Recipes",
-                description: "Easily search for recipes based on ingredients or meal types.",
-              },
-              {
-                imgSrc: "https://img.icons8.com/ios-filled/50/000000/star.png",
-                title: "Save Favorites",
-                description: "Bookmark your favorite recipes for easy access anytime.",
-              },
-              {
-                imgSrc: "https://img.icons8.com/ios-filled/50/000000/food-bar.png",
-                title: "Explore Cuisines",
-                description: "Discover new cuisines and exciting dishes from around the world.",
-              },
-            ].map((feature) => (
+          
+          <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-8">
+            {features.map((feature) => (
               <div
-                className="text-center p-6 bg-white shadow-lg rounded-lg transition-transform duration-300 transform hover:scale-105 hover:bg-gray-50"
                 key={feature.title}
+                className="bg-white rounded-xl shadow-lg p-8 transition-all duration-300 hover:shadow-xl hover:transform hover:scale-105"
               >
-                <img src={feature.imgSrc} alt={feature.title} className="mx-auto h-12 w-12 mb-4" />
-                <h3 className="mt-5 text-lg font-medium text-gray-900">{feature.title}</h3>
-                <p className="mt-2 text-gray-600">{feature.description}</p>
+                <img src={feature.imgSrc} alt="" className="w-12 h-12 mx-auto" />
+                <h3 className="mt-6 text-xl font-semibold text-gray-900 text-center">
+                  {feature.title}
+                </h3>
+                <p className="mt-4 text-gray-600 text-center">
+                  {feature.description}
+                </p>
               </div>
             ))}
           </div>
         </div>
       </div>
 
-      {/* Call to Action Section */}
-      <div className="relative text-black py-16 pt-0 flex flex-col lg:flex-row items-center lg:items-start my-20">
-        <div className="w-full lg:w-auto flex-shrink-0 lg:ml-36">
-          <img
-            src="/images/cookingillu.png"
-            alt="Cooking Illustration"
-            className="w-full h-72 lg:h-96 object-cover"
-          />
-        </div>
-        <div className="lg:absolute inset-0 flex flex-col items-center justify-center text-center px-4 lg:px-0 lg:ml-80 mt-10 lg:mt-0">
-          <h2 className="text-2xl lg:text-3xl font-extrabold">
-            Start Your Cooking Adventure Now!
-          </h2>
-          <p className="mt-4 text-4xl lg:text-6xl font-extrabold w-full lg:w-1/2">
-            Join RecipeApp and Explore culinary wonders.
-          </p>
-          <div className="mt-4">
-            <a
-              href="#"
-              className="inline-block px-6 py-2 lg:px-8 lg:py-3 text-yellow-400 rounded-md text-3xl lg:text-6xl font-extrabold hover:text-yellow-600 transition duration-200"
-            >
-              Explore
-            </a>
-          </div>
-        </div>
-      </div>
-
-      {/* Share Your Recipe Banner */}
-      <div className="py-8 flex flex-col lg:flex-row items-center lg:items-start">
-        {/* Image for small screens */}
-        <div className="lg:hidden ml-24 w-full flex-shrink-0">
-          <img
-            src="/images/shareRecipe.png"
-            alt="Food Background"
-            className="w-[300px] h-72 md:w-[400px] md:h-80 object-cover"
-          />
-        </div>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center mt-8 lg:mt-32">
-          <h2 className="text-2xl md:text-3xl font-extrabold">Share Your Recipe!</h2>
-          <p className="mt-2 text-base md:text-lg">
-            Have a delicious recipe? Share it with our community and inspire others!
-          </p>
-          <div className="mt-4">
-            <a
-              href="#"
-              className="inline-block px-4 py-2 md:px-6 md:py-2 border border-transparent text-xl md:text-2xl font-medium rounded-md bg-white text-green-600 hover:bg-gray-100 hover:text-lime-500 transition duration-200"
-            >
-              Submit Your Recipe
-            </a>
-          </div>
-        </div>
-        {/* Image for large screens */}
-        <div className="hidden lg:block ml-10 mr-36 w-full lg:w-auto flex-shrink-0">
-          <img
-            src="/images/shareRecipe.png"
-            alt="Food Background"
-            className="w-[500px] h-96 object-cover"
-          />
-        </div>
-      </div>
-
-      {/* Footer Section */}
-      <footer className="bg-gray-900 text-white py-6">
+      {/* CTA Section */}
+      <div className="relative py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <p className="text-center text-sm">© 2024 RecipeApp. All rights reserved.</p>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div className="order-2 lg:order-1">
+              <h2 className="text-3xl sm:text-4xl font-extrabold text-gray-900">
+                Start Your Cooking Adventure Now!
+              </h2>
+              <p className="mt-4 text-xl text-gray-600">
+                Join RecipeApp and explore culinary wonders from around the world.
+              </p>
+              <div className="mt-8">
+                <Link
+                  to="/recipe"
+                  className="inline-block px-8 py-4 rounded-lg bg-blue-600 text-white text-lg font-medium hover:bg-blue-700 transition-all duration-200"
+                >
+                  Get Started
+                </Link>
+              </div>
+            </div>
+            <div className="order-1 lg:order-2">
+              <img
+                src="/images/cookingillu.png"
+                alt="Cooking Illustration"
+                className="w-full h-auto rounded-lg shadow-xl"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Share Recipe Section */}
+      <div className="bg-gray-50 py-16">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div>
+              <img
+                src="/images/shareRecipe.png"
+                alt="Share Recipe"
+                className="w-full h-auto rounded-lg shadow-xl"
+              />
+            </div>
+            <div className="text-center lg:text-left">
+              <h2 className="text-3xl font-extrabold text-gray-900">
+                Share Your Recipe!
+              </h2>
+              <p className="mt-4 text-xl text-gray-600">
+                Have a delicious recipe? Share it with our community and inspire others!
+              </p>
+              <div className="mt-8">
+                <Link
+                  to="/share"
+                  className="inline-block px-8 py-4 rounded-lg bg-green-600 text-white text-lg font-medium hover:bg-green-700 transition-all duration-200"
+                >
+                  Submit Recipe
+                </Link>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Footer */}
+      <footer className="bg-gray-900 text-white py-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <p className="text-sm">© 2024 RecipeApp. All rights reserved.</p>
         </div>
       </footer>
+      
       <GoToTop />
     </div>
   );
