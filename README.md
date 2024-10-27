@@ -117,21 +117,20 @@ Please note that this project follows a [Contributor Code of Conduct](./CODE_OF_
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## 👥 Contributors
+## ❤️ Acknowledgments
 
-<table>
-  <tr>
-    <td align="center">
-      <a href="https://github.com/rudalkunwar">
-        <img src="https://avatars.githubusercontent.com/u/yourGithubID?v=4" width="100px;" alt="rudalkunwar"/>
-        <br />
-        <sub><b>rudalkunwar</b></sub>
-      </a>
-      <br />
-      <a href="https://github.com/rudalkunwar/recipe-app/commits?author=rudalkunwar" title="Code">💻</a>
-    </td>
-  </tr>
-</table>
+A heartfelt thank you to the following individuals for their valuable contributions to **RecipeApp**. Your support and dedication are greatly appreciated:
+
+<a href="https://github.com/rudalkunwar/recipe-app/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=rudalkunwar/recipe-app&max=500&columns=20&anon=1" alt="Contributors" />
+</a>
+
+<div align="center">
+    <a href="#top">
+        <img src="https://img.shields.io/badge/Back%20to%20Top-000000?style=for-the-badge&logo=github&logoColor=white" alt="Back to Top">
+    </a>
+</div>
+
 
 ---
 
