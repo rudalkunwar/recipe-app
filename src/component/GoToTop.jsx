@@ -1,38 +1,44 @@
-import React, { useEffect, useState } from "react";
-const GoToTop = () => {
-    const [isVisible, setIsVisible] = useState(false);
-  
-    const goToBtn = () => {
-        console.log("first")
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    };
-  
-    const listenToScroll = () => {
-      let heightToHidden = 70;
-      const winScroll =
-        document.body.scrollTop || document.documentElement.scrollTop;
-  
-      if (winScroll > heightToHidden) {
-        setIsVisible(true);
-      } else {
-        setIsVisible(false);
-      }
-    };
-  
-    useEffect(() => {
-      window.addEventListener("scroll", listenToScroll);
-      return () => window.removeEventListener("scroll", listenToScroll);
-    }, []);
+import React, { useState, useEffect } from "react";
+import { FaArrowUp } from "react-icons/fa";
 
-    return (
-      <div className="work flex justify-center items-center relative z-40">
-  {isVisible && (
-    <button className="top-btn fixed right-5 bottom-[5%] z-10 bg-blue-500 p-1.5 sm:p-2 sm:right-7 rounded-full cursor-pointer flex justify-center items-center" onClick={goToBtn}>
-      <img src="/arrowUp.png" alt="arrow" className="w-5 sm:w-6" />
-    </button>
-  )}
-</div>
-    )
+const GoToTop = () => {
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    window.addEventListener("scroll", toggleVisibility);
+    return () => {
+      window.removeEventListener("scroll", toggleVisibility);
+    };
+  }, []);
+
+  const toggleVisibility = () => {
+    if (window.pageYOffset > 300) {
+      setIsVisible(true);
+    } else {
+      setIsVisible(false);
+    }
+  };
+
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
+
+  return (
+    <div className="fixed z-50 bottom-8 right-8">
+      {isVisible && (
+        <button
+          onClick={scrollToTop}
+          className="relative bg-blue-600 text-white font-bold rounded-full focus:outline-none shadow-md transition-all duration-300 ease-in-out transform hover:scale-110"
+          style={{ padding: "12px" }} // Adjust padding for a complete circle
+        >
+          <FaArrowUp size={24} className="relative z-10" />
+        </button>
+      )}
+    </div>
+  );
 };
 
 export default GoToTop;
