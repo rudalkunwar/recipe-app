@@ -1,6 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import GoToTop from '../component/GoToTop';
+import Footer from "../components/nav/Footer";
+
 
 function Home() {
   const features = [
@@ -136,7 +138,7 @@ function Home() {
               </p>
               <div className="mt-8">
                 <Link
-                  to="/share"
+                  to="/submitRecipe"
                   className="inline-block px-8 py-4 rounded-lg bg-green-600 text-white text-lg font-medium hover:bg-green-700 transition-all duration-200"
                 >
                   Submit Recipe
