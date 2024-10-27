@@ -5,17 +5,17 @@ import GoToTop from '../component/GoToTop';
 function Home() {
   const features = [
     {
-      imgSrc: "/api/placeholder/50/50",
+      imgSrc: "https://img.icons8.com/ios-filled/50/000000/search.png",
       title: "Search Recipes",
       description: "Easily search for recipes based on ingredients or meal types."
     },
     {
-      imgSrc: "/api/placeholder/50/50",
+      imgSrc: "https://img.icons8.com/ios-filled/50/000000/star.png",
       title: "Save Favorites",
       description: "Bookmark your favorite recipes for easy access anytime."
     },
     {
-      imgSrc: "/api/placeholder/50/50",
+      imgSrc: "https://img.icons8.com/ios-filled/50/000000/food-bar.png",
       title: "Explore Cuisines",
       description: "Discover new cuisines and exciting dishes from around the world."
     }
