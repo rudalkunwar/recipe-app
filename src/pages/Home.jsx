@@ -125,14 +125,14 @@ function Home() {
     <p className="mt-2 text-base md:text-lg">
       Have a delicious recipe? Share it with our community and inspire others!
     </p>
-    <div className="mt-4">
+   <Link to={"/submitRecipe"}> <div className="mt-4">
       <p
         href="#"
         className="inline-block px-4 py-2 hover:cursor-pointer md:px-6 md:py-2 border border-transparent text-xl md:text-2xl font-medium rounded-md bg-white text-green-600 hover:bg-gray-100 hover:text-lime-500 transition duration-200"
       >
         Submit Your Recipe
       </p>
-    </div>
+    </div></Link>
   </div>
 
   {/* Image for large screens */}

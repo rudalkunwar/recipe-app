@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import React from "react";
 import Footer from "../components/nav/Footer";
 
@@ -146,6 +146,11 @@ const RecipeFormCompnent = () => {
 
 // ------------------------RECIPE PAGE-----------------------------------
 const RecipeForm = () => {
+
+  useEffect(() => {
+    window.scrollTo(0, 0); // Scrolls to the top of the page on load
+  }, []);
+
   return (
     <>
       {/* ---------HEADER------------- */}
