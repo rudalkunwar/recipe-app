@@ -178,3 +178,21 @@ Please note that Open Source Design has a [Contributor Code of Conduct](./CODE_O
 
 </div>
 
+<div>
+   ## Contributors ✨
+Thanks to these wonderful people for their contributions:
+
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
+<table>
+  <tr>
+    <td align="center"><a href="https://github.com/rudalkunwar"><img src="https://avatars.githubusercontent.com/u/yourGithubID?v=4" width="100px;" alt="rudalkunwar"/><br /><sub><b>rudalkunwar</b></sub></a><br /><a href="https://github.com/rudalkunwar/recipe-app/commits?author=rudalkunwar" title="Code">💻</a></td>
+  </tr>
+</table>
+<!-- markdownlint-enable -->
+<!-- prettier-ignore-end -->
+<!-- ALL-CONTRIBUTORS-LIST:END -->
+
+</div>
+
