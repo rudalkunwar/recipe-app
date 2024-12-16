@@ -5,6 +5,7 @@ import Navbar from "./components/nav/Navbar";
 import Recipe from "./pages/Recipe";
 import Description from "./pages/Description";
 import RecipeForm from "./pages/RecipeForm";
+import MessengerBot from "./component/MessengerBot";
 function App() {
   return < >
     <Navbar />
@@ -15,6 +16,7 @@ function App() {
       <Route path="/recipe/des/:id" element={<Description />} />
       <Route path="/submitRecipe" element={<RecipeForm />} />
     </Routes>
+    <MessengerBot/>
   </>;
 }
 
