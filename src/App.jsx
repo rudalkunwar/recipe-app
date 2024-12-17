@@ -18,9 +18,7 @@ function App() {
       <Route path="/submitRecipe" element={<RecipeForm />} />
       <Route path="/privacy-policy" element={<PrivacyPolicy />} />
     </Routes>
-    <div className="fixed bottom-0 bg-white">
-      <MessengerChatBot pageId='542291682293940' appId='592047586550815' />
-    </div>
+    <MessengerChatBot pageId='542291682293940' appId='592047586550815' />
   </>;
 }
 
