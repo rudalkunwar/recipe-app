@@ -6,7 +6,7 @@ const MessengerChatBot = ({ pageId, appId }) => {
         <FacebookProvider appId={appId}>
             <CustomChat
                 pageId={pageId}
-                minimized="true"
+                minimized="false"
                 themeColor="#0084ff"
                 loggedInGreeting="Hi! How can we help you today?"
                 loggedOutGreeting="Hi! Please log in to chat with us."
