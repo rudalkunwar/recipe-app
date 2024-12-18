@@ -7,12 +7,12 @@ import Description from "./pages/Description";
 import RecipeForm from "./pages/RecipeForm";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import About from "./pages/About";
-import ChatBot from "./component/ChatBot";
+import MessengerChatBot from "./component/MessengerChatBot";
+import Footer from "./components/nav/Footer";
 function App() {
   return < >
     <Navbar />
-    {/* <MessengerChatBot pageId='542291682293940' appId='592047586550815' /> */}
-    <ChatBot  pageId='542291682293940' appId='592047586550815' />
+    <MessengerChatBot pageId='542291682293940' appId='592047586550815' />
     <Routes>
       {/* <Home /> */}
       <Route path="/" element={<Home />} />
@@ -22,6 +22,7 @@ function App() {
       <Route path="/about" element={<About />} />
       <Route path="/privacy-policy" element={<PrivacyPolicy />} />
     </Routes>
+    <Footer />
 
   </>;
 }

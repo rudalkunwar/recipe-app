@@ -181,8 +181,6 @@ const RecipeForm = () => {
       <div className="mr-10 pt-16">
         <RecipeFormCompnent />
       </div>
-
-      <Footer />
     </>
   );
 };
