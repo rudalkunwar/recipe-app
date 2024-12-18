@@ -77,7 +77,6 @@ const FacebookMessengerChat = ({
                 theme_color={themeColor}
                 logged_in_greeting="Hi! How can we help you?"
                 logged_out_greeting="Please log in to chat with us."
-                minimized="true"
             ></div>
         </div>
     );
