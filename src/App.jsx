@@ -12,7 +12,7 @@ import ChatBot from "./component/ChatBot";
 import Footer from "./components/nav/Footer";
 function App() {
   return < >
-    <Navbar pageId='1119864616458434' appId='592047586550815' />
+    <Navbar />
     {/* <MessengerChatBot pageId='1119864616458434' appId='592047586550815' /> */}
     <ChatBot pageId='1119864616458434' appId='592047586550815' />
     <Routes>
