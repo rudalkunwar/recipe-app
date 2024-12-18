@@ -16,7 +16,7 @@ function App() {
     <Navbar />
     {/* <MessengerChatBot pageId='1119864616458434' appId='592047586550815' /> */}
     {/* <ChatBot pageId='1119864616458434' appId='592047586550815' /> */}
-    <FacebookMessengerChat 
+    <MessengerChatBot 
         appId="968976658430478"
         pageId="517579444770810"
       />
