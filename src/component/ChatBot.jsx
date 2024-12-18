@@ -9,7 +9,7 @@ export const ChatBot = () => {
       window.FB.init({
         appId: '968976658430478', // Your Facebook App ID
         xfbml: true,
-        version: 'v12.0', // Test with a different SDK version
+        version: 'v17.0', // Test with a different SDK version
       });
       console.log('Facebook Messenger SDK initialized');
       setFbLoaded(true); // Mark the SDK as loaded
