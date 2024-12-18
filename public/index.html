@@ -5,10 +5,7 @@
     <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#000000" />
-    <meta
-      name="description"
-      content="Web site created using create-react-app"
-    />
+    <meta name="description" content="Web site created using create-react-app" />
     <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
     <title>Recipe App</title>
@@ -34,19 +31,10 @@
     <div
       id="fb-customer-chat"
       class="fb-customerchat"
-      page_id="517579444770810"
-      <!--
-      Your
-      Facebook
-      Page
-      id
-      here
-      --
-    >
-      attribution="biz_inbox" minimized="false"
-      <!-- Set this to "true" if you want the chat to start minimized -->
-      >
-    </div>
+      page_id="517579444770810" 
+      attribution="biz_inbox"
+      minimized="false"
+    ></div>
 
     <!-- Messenger Extensions SDK -->
     <script>
@@ -65,10 +53,11 @@
     <script>
       window.fbAsyncInit = function () {
         FB.init({
+          appId: '968976658430478', 
           xfbml: true, // Enable XFBML to parse the customer chat plugin
-          version: "v21.0", // Use a supported version of the SDK
+          version: 'v10.0', // Use a supported version of the SDK
         });
-        console.log("Facebook SDK initialized");
+        console.log("Facebook Messenger Chat initialized");
 
         // Ensure the XFBML is parsed after SDK initialization
         FB.XFBML.parse();
@@ -92,11 +81,5 @@
       })(document, "script", "facebook-jssdk");
     </script>
 
-    <script>
-      window.extAsyncInit = function () {
-        // The Messenger Extensions SDK is ready to use
-        console.log("Messenger Extensions SDK loaded");
-      };
-    </script>
   </body>
 </html>
