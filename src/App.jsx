@@ -14,7 +14,7 @@ function App() {
   return < >
     <Navbar pageId='1119864616458434' appId='592047586550815' />
     {/* <MessengerChatBot pageId='1119864616458434' appId='592047586550815' /> */}
-    <ChatBot />
+    <ChatBot pageId='1119864616458434' appId='592047586550815' />
     <Routes>
       {/* <Home /> */}
       <Route path="/" element={<Home />} />
