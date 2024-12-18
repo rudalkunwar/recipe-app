@@ -1,166 +1,149 @@
 import React, { useEffect, useState, useCallback } from 'react';
 
-// Custom error types for more specific error handling
-class FacebookSDKError extends Error {
-    constructor(message) {
-        super(message);
-        this.name = 'FacebookSDKError';
-    }
-}
-
 const ChatBot = ({
     appId,
     pageId,
     loggedInGreeting = 'Hi! How can we help you today?',
     loggedOutGreeting = 'Hi! Please log in to chat with us.',
     themeColor = '#0084ff',
-    onError // Optional error callback prop
+    debug = true // Added debug mode
 }) => {
     const [sdkStatus, setSdkStatus] = useState({
         loaded: false,
         error: null,
-        retryCount: 0
+        scriptAdded: false
     });
 
-    // Comprehensive error logging and handling function
-    const handleError = useCallback((error, context) => {
-        // Log to console
-        console.error(`Facebook Messenger Chat Error (${context}):`, error);
-
-        // Call external error handler if provided
-        if (onError && typeof onError === 'function') {
-            onError({
-                error,
-                context,
-                appId,
-                pageId
-            });
+    // Debug logging function
+    const debugLog = useCallback((message, data) => {
+        if (debug) {
+            console.log(`[Facebook Messenger Chat Debug] ${message}`, data || '');
         }
-    }, [onError, appId, pageId]);
+    }, [debug]);
 
-    // Validate required props
     useEffect(() => {
+        debugLog('Component Mounted', { appId, pageId });
+
+        // Validate required props
         if (!appId) {
-            handleError(
-                new FacebookSDKError('Facebook App ID is required'),
-                'Prop Validation'
-            );
+            debugLog('ERROR: App ID is missing');
+            return;
         }
         if (!pageId) {
-            handleError(
-                new FacebookSDKError('Facebook Page ID is required'),
-                'Prop Validation'
-            );
+            debugLog('ERROR: Page ID is missing');
+            return;
         }
-    }, [appId, pageId, handleError]);
 
-    useEffect(() => {
-        // Prevent multiple SDK loading attempts
-        if (sdkStatus.loaded || sdkStatus.retryCount > 3) return;
+        // Check if SDK is already loaded
+        if (window.FB) {
+            debugLog('FB SDK already loaded');
+            setSdkStatus(prev => ({ ...prev, loaded: true }));
+            return;
+        }
 
         // Load Facebook SDK
-        const loadFacebookSDK = () => {
-            // Check if SDK is already present
-            if (window.FB) {
-                setSdkStatus(prev => ({ ...prev, loaded: true }));
-                return;
-            }
+        const script = document.createElement('script');
+        script.src = 'https://connect.facebook.net/en_US/sdk.js';
+        script.async = true;
+        script.defer = true;
+        script.crossOrigin = 'anonymous';
 
-            const script = document.createElement('script');
-            script.src = 'https://connect.facebook.net/en_US/sdk.js';
-            script.async = true;
-            script.defer = true;
-            script.crossOrigin = 'anonymous';
-
-            script.onload = () => {
-                try {
-                    // Validate FB object exists
-                    if (!window.FB) {
-                        throw new FacebookSDKError('Facebook SDK loaded but FB object is undefined');
-                    }
-
-                    // Initialize SDK with comprehensive error handling
-                    window.FB.init({
-                        appId: appId,
-                        autoLogAppEvents: true,
-                        xfbml: true,
-                        version: 'v18.0', // Latest version as of December 2024
-                    });
-
-                    // Validate initialization
-                    if (!window.FB.getAuthResponse) {
-                        throw new FacebookSDKError('Facebook SDK initialization failed');
-                    }
-
-                    setSdkStatus({
-                        loaded: true,
-                        error: null,
-                        retryCount: 0
-                    });
-                } catch (error) {
-                    handleError(error, 'SDK Initialization');
-                    setSdkStatus(prev => ({
-                        loaded: false,
-                        error,
-                        retryCount: prev.retryCount + 1
-                    }));
-                }
-            };
-
-            script.onerror = (error) => {
-                handleError(
-                    new FacebookSDKError('Failed to load Facebook SDK script'),
-                    'Script Loading'
-                );
-                setSdkStatus(prev => ({
-                    loaded: false,
-                    error,
-                    retryCount: prev.retryCount + 1
-                }));
-            };
-
+        script.onload = () => {
+            debugLog('SDK Script Loaded');
             try {
-                document.body.appendChild(script);
-            } catch (appendError) {
-                handleError(appendError, 'Script Appending');
+                window.FB.init({
+                    appId: appId,
+                    autoLogAppEvents: true,
+                    xfbml: true,
+                    version: 'v18.0',
+                });
+
+                debugLog('FB SDK Initialized', window.FB);
+
+                // Force render of customer chat plugin
+                if (window.FB.XFBML) {
+                    window.FB.XFBML.parse();
+                    debugLog('XFBML Parsed');
+                }
+
+                setSdkStatus({
+                    loaded: true,
+                    error: null,
+                    scriptAdded: true
+                });
+            } catch (error) {
+                debugLog('Initialization Error', error);
+                setSdkStatus({
+                    loaded: false,
+                    error: error.message,
+                    scriptAdded: true
+                });
             }
         };
 
-        loadFacebookSDK();
+        script.onerror = (error) => {
+            debugLog('Script Loading Error', error);
+            setSdkStatus({
+                loaded: false,
+                error: 'Failed to load SDK',
+                scriptAdded: true
+            });
+        };
 
-        // Cleanup function to remove script if component unmounts
+        // Append script
+        document.body.appendChild(script);
+        setSdkStatus(prev => ({ ...prev, scriptAdded: true }));
+        debugLog('Script Added to Document');
+
+        // Cleanup
         return () => {
-            const script = document.querySelector('script[src="https://connect.facebook.net/en_US/sdk.js"]');
-            if (script) {
-                script.remove();
+            const existingScript = document.querySelector('script[src="https://connect.facebook.net/en_US/sdk.js"]');
+            if (existingScript) {
+                existingScript.remove();
             }
         };
-    }, [appId, handleError, sdkStatus.loaded, sdkStatus.retryCount]);
+    }, [appId, pageId, debugLog]);
 
-    // Render error state or fallback UI
-    if (sdkStatus.error) {
+    // Render debug information
+    if (debug) {
         return (
-            <div
-                className="facebook-messenger-error"
-                style={{
-                    color: 'red',
-                    padding: '10px',
+            <div>
+                <div style={{
                     border: '1px solid red',
-                    borderRadius: '5px'
-                }}
-            >
-                Failed to load Facebook Messenger Chat.
-                {sdkStatus.retryCount > 0 && ` (Retry attempt: ${sdkStatus.retryCount})`}
+                    padding: '10px',
+                    margin: '10px 0',
+                    backgroundColor: 'lightyellow'
+                }}>
+                    <h3>Facebook Messenger Chat Debug Info</h3>
+                    <p>App ID: {appId || 'NOT SET'}</p>
+                    <p>Page ID: {pageId || 'NOT SET'}</p>
+                    <p>SDK Loaded: {sdkStatus.loaded ? 'Yes' : 'No'}</p>
+                    {sdkStatus.error && (
+                        <p style={{ color: 'red' }}>Error: {sdkStatus.error}</p>
+                    )}
+                </div>
+
+                {/* Render actual chat component */}
+                {sdkStatus.loaded && (
+                    <div>
+                        <div id="fb-root"></div>
+                        <div
+                            className="fb-customerchat"
+                            attribution="setup_tool"
+                            page_id={pageId}
+                            theme_color={themeColor}
+                            logged_in_greeting={loggedInGreeting}
+                            logged_out_greeting={loggedOutGreeting}
+                            minimized="true"
+                        ></div>
+                    </div>
+                )}
             </div>
         );
     }
 
-    // Only render customer chat if SDK is fully loaded and all required props are present
-    if (!sdkStatus.loaded || !appId || !pageId) {
-        return null;
-    }
-
-    return (
+    // Normal rendering
+    return sdkStatus.loaded ? (
         <div>
             <div id="fb-root"></div>
             <div
@@ -173,7 +156,7 @@ const ChatBot = ({
                 minimized="true"
             ></div>
         </div>
-    );
+    ) : null;
 };
 
 export default ChatBot;
