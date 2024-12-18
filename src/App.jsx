@@ -5,12 +5,14 @@ import Navbar from "./components/nav/Navbar";
 import Recipe from "./pages/Recipe";
 import Description from "./pages/Description";
 import RecipeForm from "./pages/RecipeForm";
-import MessengerChatBot from "./component/MessengerChatBot";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import About from "./pages/About";
+import ChatBot from "./component/ChatBot";
 function App() {
   return < >
     <Navbar />
+    {/* <MessengerChatBot pageId='542291682293940' appId='592047586550815' /> */}
+    <ChatBot  pageId='542291682293940' appId='592047586550815' />
     <Routes>
       {/* <Home /> */}
       <Route path="/" element={<Home />} />
@@ -20,7 +22,7 @@ function App() {
       <Route path="/about" element={<About />} />
       <Route path="/privacy-policy" element={<PrivacyPolicy />} />
     </Routes>
-    <MessengerChatBot pageId='542291682293940' appId='592047586550815' />
+
   </>;
 }
 

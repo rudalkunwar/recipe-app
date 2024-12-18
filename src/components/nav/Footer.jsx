@@ -1,6 +1,4 @@
 import React from "react";
-import GoToTop from "../../component/GoToTop";
-
 const Footer = () => {
   return (
     <>
@@ -11,7 +9,6 @@ const Footer = () => {
           </p>
         </div>
       </footer>
-      <GoToTop />
     </>
   );
 };
