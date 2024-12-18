@@ -5,10 +5,7 @@
     <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#000000" />
-    <meta
-      name="description"
-      content="Web site created using create-react-app"
-    />
+    <meta name="description" content="Web site created using create-react-app" />
     <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
     <title>Recipe App</title>
@@ -26,24 +23,45 @@
       attribution="biz_inbox"
     ></div>
 
+    <!-- Facebook SDK (needed for Messenger plugin to work) -->
     <script>
       window.fbAsyncInit = function () {
         FB.init({
-          xfbml: true,
-          version: "20.0", // Use the latest version available
+          xfbml: true, // Parse the XFBML tags
+          version: 'v21.0', // Use a valid version of the Facebook API
         });
-        console.log("Facebook Messenger Chat initialized");
+        console.log("Facebook SDK initialized");
       };
 
       (function (d, s, id) {
-        var js,
-          fjs = d.getElementsByTagName(s)[0];
+        var js, fjs = d.getElementsByTagName(s)[0];
         if (d.getElementById(id)) return;
         js = d.createElement(s);
         js.id = id;
-        js.src = "https://connect.facebook.net/en_US/sdk.js"; // Correct SDK URL
+        js.src = "https://connect.facebook.net/en_US/sdk.js";
         fjs.parentNode.insertBefore(js, fjs);
       })(document, "script", "facebook-jssdk");
+    </script>
+
+    <!-- Messenger Extensions SDK -->
+    <script>
+      (function (d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s);
+        js.id = id;
+        js.src = "//connect.facebook.net/en_US/messenger.Extensions.js";
+        fjs.parentNode.insertBefore(js, fjs);
+      })(document, "script", "Messenger");
+    </script>
+
+    <script>
+      window.extAsyncInit = function () {
+        // The Messenger Extensions SDK is ready to use.
+        console.log("Messenger Extensions SDK loaded");
+
+        // Optional: You can now use Messenger Extensions SDK functions here
+      };
     </script>
   </body>
 </html>
