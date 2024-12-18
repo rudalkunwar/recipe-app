@@ -5,7 +5,10 @@
     <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#000000" />
-    <meta name="description" content="Web site created using create-react-app" />
+    <meta
+      name="description"
+      content="Web site created using create-react-app"
+    />
     <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
     <title>Recipe App</title>
@@ -13,7 +16,7 @@
     <style>
       /* Ensure the Facebook Messenger chat button is positioned correctly */
       #fb-customer-chat {
-        position: fixed !important;
+        position: fixed;
         bottom: 0;
         right: 0;
         z-index: 9999;
@@ -31,7 +34,7 @@
     <div
       id="fb-customer-chat"
       class="fb-customerchat"
-      page_id="517579444770810" 
+      page_id="517579444770810"
       attribution="biz_inbox"
       minimized="false"
     ></div>
@@ -53,9 +56,9 @@
     <script>
       window.fbAsyncInit = function () {
         FB.init({
-          appId: '968976658430478', 
+          appId: "968976658430478",
           xfbml: true, // Enable XFBML to parse the customer chat plugin
-          version: 'v10.0', // Use a supported version of the SDK
+          version: "v10.0", // Use a supported version of the SDK
         });
         console.log("Facebook Messenger Chat initialized");
 
@@ -80,6 +83,5 @@
         fjs.parentNode.insertBefore(js, fjs);
       })(document, "script", "facebook-jssdk");
     </script>
-
   </body>
 </html>
