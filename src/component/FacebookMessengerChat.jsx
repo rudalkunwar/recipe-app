@@ -1,73 +1,86 @@
 import React, { useEffect } from 'react';
 
-const FacebookMessengerChat = ({ 
-  appId = '592047586550815', 
-  pageId = '542291682293940', 
-  themeColor = '#0084ff' 
+const FacebookMessengerChat = ({
+    appId = '592047586550815',
+    pageId = '542291682293940',
+    themeColor = '#0084ff',
 }) => {
-  useEffect(() => {
-    // Load Facebook SDK
-    const loadFacebookSDK = () => {
-      // Remove any existing Facebook SDK scripts
-      const existingScripts = document.getElementsByTagName('script');
-      for (let script of existingScripts) {
-        if (script.src.includes('connect.facebook.net')) {
-          script.remove();
-        }
-      }
+    useEffect(() => {
+        const loadFacebookSDK = () => {
+            console.log("🔧 [Facebook SDK] Initializing...");
 
-      // Create fb-root if not exists
-      if (!document.getElementById('fb-root')) {
-        const fbRoot = document.createElement('div');
-        fbRoot.id = 'fb-root';
-        document.body.appendChild(fbRoot);
-      }
+            // Check if the SDK is already loaded
+            if (document.getElementById('facebook-jssdk')) {
+                console.warn("⚠️ [Facebook SDK] SDK is already loaded.");
+                return;
+            }
 
-      // Facebook SDK Script
-      window.fbAsyncInit = function() {
-        window.FB.init({
-          appId: appId,
-          cookie: true,
-          xfbml: true,
-          version: 'v21.0'
-        });
+            // Create fb-root if it doesn't exist
+            if (!document.getElementById('fb-root')) {
+                const fbRoot = document.createElement('div');
+                fbRoot.id = 'fb-root';
+                document.body.appendChild(fbRoot);
+                console.log("✅ [Facebook SDK] fb-root created.");
+            }
 
-        // Force parse XFBML
-        window.FB.XFBML.parse();
-      };
+            // Initialize Facebook SDK
+            window.fbAsyncInit = function () {
+                console.log("⚙️ [Facebook SDK] Initializing settings...");
+                window.FB.init({
+                    appId: appId,
+                    cookie: true,
+                    xfbml: true,
+                    version: 'v21.0',
+                });
+                console.log("✅ [Facebook SDK] Successfully initialized.");
+                window.FB.XFBML.parse();
+            };
 
-      (function(d, s, id) {
-        var js, fjs = d.getElementsByTagName(s)[0];
-        if (d.getElementById(id)) return;
-        js = d.createElement(s); js.id = id;
-        js.src = "https://connect.facebook.net/en_US/sdk.js";
-        fjs.parentNode.insertBefore(js, fjs);
-      }(document, 'script', 'facebook-jssdk'));
-    };
+            // Load the SDK script
+            (function (d, s, id) {
+                const fjs = d.getElementsByTagName(s)[0];
+                if (d.getElementById(id)) return;
+                const js = d.createElement(s);
+                js.id = id;
+                js.src = "https://connect.facebook.net/en_US/sdk.js";
+                js.onload = () => console.log("✅ [Facebook SDK] Script loaded.");
+                js.onerror = () => console.error("❌ [Facebook SDK] Error loading script.");
+                fjs.parentNode.insertBefore(js, fjs);
+            })(document, 'script', 'facebook-jssdk');
+        };
 
-    // Load SDK
-    loadFacebookSDK();
+        loadFacebookSDK();
 
-    // Cleanup function
-    return () => {
-      const script = document.getElementById('facebook-jssdk');
-      if (script) script.remove();
-    };
-  }, [appId, pageId]);
+        return () => {
+            console.log("🧹 [Facebook SDK] Cleaning up...");
+            const script = document.getElementById('facebook-jssdk');
+            if (script) {
+                script.remove();
+                console.log("✅ [Facebook SDK] Script removed.");
+            }
+            const fbRoot = document.getElementById('fb-root');
+            if (fbRoot) {
+                fbRoot.remove();
+                console.log("✅ [Facebook SDK] fb-root removed.");
+            }
+            delete window.FB;
+            delete window.fbAsyncInit;
+        };
+    }, [appId, pageId]);
 
-  return (
-    <div>
-      <div 
-        className="fb-customerchat"
-        attribution="setup_tool"
-        page_id={pageId}
-        theme_color={themeColor}
-        logged_in_greeting="Hi! How can we help you?"
-        logged_out_greeting="Please log in to chat with us."
-        minimized="true"
-      ></div>
-    </div>
-  );
+    return (
+        <div>
+            <div
+                className="fb-customerchat"
+                attribution="setup_tool"
+                page_id={pageId}
+                theme_color={themeColor}
+                logged_in_greeting="Hi! How can we help you?"
+                logged_out_greeting="Please log in to chat with us."
+                minimized="true"
+            ></div>
+        </div>
+    );
 };
 
 export default FacebookMessengerChat;
