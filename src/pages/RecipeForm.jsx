@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import React from "react";
-import Footer from "../components/nav/Footer";
 
 // --------------------FORM COMPONENT-------------------------
 const RecipeFormCompnent = () => {

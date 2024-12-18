@@ -1,8 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import GoToTop from '../component/GoToTop';
-import Footer from "../components/nav/Footer";
-
 
 function Home() {
   const features = [

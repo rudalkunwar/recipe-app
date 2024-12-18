@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 
-const FacebookMessengerChat = ({ appId, pageId, themeColor = '#0084ff',
-}) => {
+const FacebookMessengerChat = ({ appId, pageId, themeColor = '#0084ff' }) => {
     useEffect(() => {
         const loadFacebookSDK = () => {
             console.log("🔧 [Facebook SDK] Initializing...");
@@ -30,6 +29,8 @@ const FacebookMessengerChat = ({ appId, pageId, themeColor = '#0084ff',
                     version: 'v21.0',
                 });
                 console.log("✅ [Facebook SDK] Successfully initialized.");
+
+                // Parse XFBML elements (including the fb-customerchat div)
                 window.FB.XFBML.parse();
             };
 
@@ -74,7 +75,8 @@ const FacebookMessengerChat = ({ appId, pageId, themeColor = '#0084ff',
                 theme_color={themeColor}
                 logged_in_greeting="Hi! How can we help you?"
                 logged_out_greeting="Please log in to chat with us."
-            // minimized="true"
+                // Uncomment the line below to enable minimized chat
+                // minimized="true"
             ></div>
         </div>
     );
