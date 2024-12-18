@@ -10,10 +10,12 @@ import About from "./pages/About";
 import Footer from "./components/nav/Footer";
 import GoToTop from "./component/GoToTop";
 import FacebookMessengerChat from "./component/FacebookMessengerChat";
+import { ChatBot } from "./component/ChatBot";
 function App() {
   return < >
     <Navbar />
     {/* <FacebookMessengerChat pageId='517579444770810' appId='968976658430478' /> */}
+    <ChatBot />
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/recipe" element={<Recipe />} />

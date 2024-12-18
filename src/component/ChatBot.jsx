@@ -1,75 +1,88 @@
 import React, { useEffect, useState } from 'react';
 
-const ChatBot = ({
-  appId = '592047586550815',
-  pageId = '542291682293940',
-  loggedInGreeting = 'Hi! How can we help you today!',
-  loggedOutGreeting = 'Hi! Please log in to chat with us.',
-  themeColor = '#0084ff'
-}) => {
-  const [sdkLoaded, setSdkLoaded] = useState(false);
+export const ChatBot = () => {
+  const [fbLoaded, setFbLoaded] = useState(false); // Track SDK load status
 
   useEffect(() => {
-    // Load Facebook SDK
-    const loadFacebookSDK = () => {
-      if (document.getElementById('facebook-jssdk')) return;
+    // Initialize the Messenger SDK once the component is mounted
+    window.fbAsyncInit = function () {
+      window.FB.init({
+        appId: '968976658430478', // Your Facebook App ID
+        xfbml: true,
+        version: 'v12.0', // Test with a different SDK version
+      });
+      console.log('Facebook Messenger SDK initialized');
+      setFbLoaded(true); // Mark the SDK as loaded
 
-      const js = document.createElement('script');
-      js.id = 'facebook-jssdk';
+      // Ensure the XFBML is parsed after SDK initialization
+      window.FB.XFBML.parse();
+
+      // Check if FB.CustomerChat is available
+      if (window.FB && window.FB.CustomerChat) {
+        console.log('FB.CustomerChat initialized');
+      } else {
+        console.error('FB.CustomerChat is not available after SDK init');
+      }
+    };
+
+    // Load the Facebook SDK asynchronously
+    (function (d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s);
+      js.id = id;
       js.src = 'https://connect.facebook.net/en_US/sdk.js';
-      js.async = true;
-      js.defer = true;
-
-      js.onload = () => {
-        window.FB.init({
-          appId: appId,
-          cookie: true,
-          xfbml: true,
-          version: 'v21.0'
-        });
-
-        // Force XFBML parsing
-        window.FB.XFBML.parse();
-        setSdkLoaded(true);
+      js.onload = function () {
+        console.log('Facebook SDK script loaded');
       };
+      js.onerror = function () {
+        console.error('Error loading the Facebook SDK script');
+      };
+      fjs.parentNode.insertBefore(js, fjs);
+    })(document, 'script', 'facebook-jssdk');
 
-      document.body.appendChild(js);
-    };
-
-    loadFacebookSDK();
-
-    // Cleanup
+    // Cleanup the Facebook SDK when the component unmounts
     return () => {
-      const script = document.getElementById('facebook-jssdk');
-      if (script) script.remove();
+      const fbScript = document.getElementById('facebook-jssdk');
+      if (fbScript) {
+        fbScript.remove();
+      }
     };
-  }, [appId]);
+  }, []);
+
+  const handleChatButtonClick = () => {
+    if (fbLoaded && window.FB && window.FB.CustomerChat) {
+      console.log('Opening Messenger Chat...');
+      // Open the Messenger chat dialog
+      window.FB.CustomerChat.showDialog();
+    } else {
+      console.error('Facebook Messenger SDK or CustomerChat not available.');
+      // Debugging: Checking the current state of FB object
+      console.log('FB object:', window.FB);
+      console.log('FB.CustomerChat:', window.FB?.CustomerChat);
+    }
+  };
 
   return (
     <div>
+      {/* Custom Chat Button */}
+      <button 
+        onClick={handleChatButtonClick} 
+        className="bg-blue-500 text-white p-3 rounded-full shadow-lg fixed bottom-6 right-6 z-50"
+      >
+        Chat with Us
+      </button>
+
+      {/* Facebook Messenger Customer Chat */}
       <div id="fb-root"></div>
       <div
         className="fb-customerchat"
         attribution="setup_tool"
-        page_id={pageId}
-        theme_color={themeColor}
-        logged_in_greeting={loggedInGreeting}
-        logged_out_greeting={loggedOutGreeting}
-        minimized="true"
+        page_id="517579444770810" // Replace with your Facebook Page ID
+        theme_color="#0084ff"
+        logged_in_greeting="Hi! How can we help you?"
+        logged_out_greeting="Please log in to chat with us."
       ></div>
-
-      {/* Debugging Information */}
-      {!sdkLoaded && (
-        <div style={{
-          border: '1px solid yellow',
-          padding: '10px',
-          backgroundColor: 'lightyellow'
-        }}>
-          Facebook SDK Loading...
-        </div>
-      )}
     </div>
   );
 };
-
-export default ChatBot;

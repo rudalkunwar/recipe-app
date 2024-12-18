@@ -5,20 +5,16 @@
     <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#000000" />
-    <meta
-      name="description"
-      content="Web site created using create-react-app"
-    />
+    <meta name="description" content="Recipe App to search the recipes." />
     <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
     <title>Recipe App</title>
-
     <style>
-      /* Ensure the Facebook Messenger chat button is positioned correctly */
-      #fb-customer-chat {
+      /* Optional: Ensure the custom chat button is positioned correctly */
+      #custom-chat-btn {
         position: fixed;
-        bottom: 0;
-        right: 0;
+        bottom: 20px;
+        right: 20px;
         z-index: 9999;
       }
     </style>
@@ -26,62 +22,6 @@
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
-
-    <!-- Facebook Messenger SDK -->
-    <div id="fb-root"></div>
-
-    <!-- Facebook Messenger Chat Plugin -->
-    <div
-      id="fb-customer-chat"
-      class="fb-customerchat"
-      page_id="517579444770810"
-      attribution="biz_inbox"
-      minimized="false"
-    ></div>
-
-    <!-- Messenger Extensions SDK -->
-    <script>
-      (function (d, s, id) {
-        var js,
-          fjs = d.getElementsByTagName(s)[0];
-        if (d.getElementById(id)) return;
-        js = d.createElement(s);
-        js.id = id;
-        js.src = "https://connect.facebook.net/en_US/messenger.Extensions.js";
-        fjs.parentNode.insertBefore(js, fjs);
-      })(document, "script", "Messenger");
-    </script>
-
-    <!-- Facebook SDK -->
-    <script>
-      window.fbAsyncInit = function () {
-        FB.init({
-          appId: "968976658430478",
-          xfbml: true, // Enable XFBML to parse the customer chat plugin
-          version: "v21.0", // Use a supported version of the SDK
-        });
-        console.log("Facebook Messenger Chat initialized");
-
-        // Ensure the XFBML is parsed after SDK initialization
-        FB.XFBML.parse();
-      };
-
-      // Load the Facebook SDK asynchronously
-      (function (d, s, id) {
-        var js,
-          fjs = d.getElementsByTagName(s)[0];
-        if (d.getElementById(id)) return;
-        js = d.createElement(s);
-        js.id = id;
-        js.src = "https://connect.facebook.net/en_US/sdk.js";
-        js.onload = function () {
-          console.log("Facebook SDK script loaded");
-        };
-        js.onerror = function () {
-          console.error("Error loading the Facebook SDK script");
-        };
-        fjs.parentNode.insertBefore(js, fjs);
-      })(document, "script", "facebook-jssdk");
-    </script>
+    <!-- React app will mount here -->
   </body>
 </html>
