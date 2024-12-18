@@ -1,48 +1,43 @@
 import React, { useEffect, useState } from 'react';
 
-const ChatBot = ({ 
-  appId, 
-  pageId, 
-  loggedInGreeting = 'Hi! How can we help you today?', 
-  loggedOutGreeting = 'Hi! Please log in to chat with us.', 
-  themeColor = '#0084ff' 
+const ChatBot = ({
+  appId = '592047586550815',
+  pageId = '542291682293940',
+  loggedInGreeting = 'Hi! How can we help you today?',
+  loggedOutGreeting = 'Hi! Please log in to chat with us.',
+  themeColor = '#0084ff'
 }) => {
   const [sdkLoaded, setSdkLoaded] = useState(false);
 
   useEffect(() => {
-    const loadFacebookSDK = () => {
-      if (!window.FB) {
-        const script = document.createElement('script');
-        script.src = 'https://connect.facebook.net/en_US/sdk.js';
-        script.async = true;
-        script.defer = true;
-        script.crossOrigin = 'anonymous';
-        
-        script.onload = () => {
-          window.FB.init({
-            appId: appId,
-            autoLogAppEvents: true,
-            xfbml: true,
-            version: 'v18.0',
-          });
+    // Facebook SDK Loading
+    window.fbAsyncInit = () => {
+      window.FB.init({
+        appId: appId,
+        cookie: true,
+        xfbml: true,
+        version: 'v21.0'  // Updated to latest version
+      });
 
-          // Force parse XFBML multiple times
-          setTimeout(() => {
-            window.FB.XFBML.parse();
-          }, 500);
-          setTimeout(() => {
-            window.FB.XFBML.parse();
-          }, 1500);
-
-          setSdkLoaded(true);
-        };
-
-        document.body.appendChild(script);
-      }
+      // Force XFBML parsing
+      window.FB.XFBML.parse();
     };
 
-    loadFacebookSDK();
-  }, [appId]);
+    // Load the SDK asynchronously
+    (function (d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) { return; }
+      js = d.createElement(s); js.id = id;
+      js.src = "https://connect.facebook.net/en_US/sdk.js";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+
+    return () => {
+      // Cleanup if needed
+      const script = document.getElementById('facebook-jssdk');
+      if (script) script.remove();
+    };
+  }, [appId, pageId]);
 
   return (
     <div>
@@ -56,17 +51,6 @@ const ChatBot = ({
         logged_out_greeting={loggedOutGreeting}
         minimized="true"
       ></div>
-      
-      {/* Debugging information */}
-      {!sdkLoaded && (
-        <div style={{ 
-          border: '1px solid red', 
-          padding: '10px', 
-          backgroundColor: 'lightyellow'
-        }}>
-          Facebook SDK Loading...
-        </div>
-      )}
     </div>
   );
 };

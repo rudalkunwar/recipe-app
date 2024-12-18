@@ -8,11 +8,13 @@ import RecipeForm from "./pages/RecipeForm";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import About from "./pages/About";
 import MessengerChatBot from "./component/MessengerChatBot";
+import ChatBot from "./component/ChatBot";
 import Footer from "./components/nav/Footer";
 function App() {
   return < >
-    <Navbar />
-    <MessengerChatBot pageId='1119864616458434' appId='592047586550815' />
+    <Navbar pageId='1119864616458434' appId='592047586550815' />
+    {/* <MessengerChatBot pageId='1119864616458434' appId='592047586550815' /> */}
+    <ChatBot />
     <Routes>
       {/* <Home /> */}
       <Route path="/" element={<Home />} />
