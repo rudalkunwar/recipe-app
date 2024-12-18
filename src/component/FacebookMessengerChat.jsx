@@ -1,9 +1,6 @@
 import React, { useEffect } from 'react';
 
-const FacebookMessengerChat = ({
-    appId = '592047586550815',
-    pageId = '542291682293940',
-    themeColor = '#0084ff',
+const FacebookMessengerChat = ({ appId, pageId, themeColor = '#0084ff',
 }) => {
     useEffect(() => {
         const loadFacebookSDK = () => {
@@ -77,6 +74,7 @@ const FacebookMessengerChat = ({
                 theme_color={themeColor}
                 logged_in_greeting="Hi! How can we help you?"
                 logged_out_greeting="Please log in to chat with us."
+            // minimized="true"
             ></div>
         </div>
     );

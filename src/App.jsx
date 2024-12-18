@@ -17,8 +17,8 @@ function App() {
     {/* <MessengerChatBot pageId='1119864616458434' appId='592047586550815' /> */}
     {/* <ChatBot pageId='1119864616458434' appId='592047586550815' /> */}
     <FacebookMessengerChat 
-        appId="592047586550815"
-        pageId="542291682293940"
+        appId="968976658430478"
+        pageId="517579444770810"
       />
     <Routes>
       {/* <Home /> */}
