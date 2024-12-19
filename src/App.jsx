@@ -10,11 +10,12 @@ import About from "./pages/About";
 import Footer from "./components/nav/Footer";
 import GoToTop from "./component/GoToTop";
 import MessengerChat from "./component/MessengerChat";
+import FacebookMessengerChat from "./component/FacebookMessengerChat";
 function App() {
   return < >
     <Navbar />
-    {/* <FacebookMessengerChat pageId='517579444770810' appId='968976658430478' /> */}
-    <MessengerChat />
+    <FacebookMessengerChat pageId='517579444770810' appId='968976658430478' />
+    {/* <MessengerChat /> */}
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/recipe" element={<Recipe />} />
