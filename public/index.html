@@ -18,56 +18,35 @@
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
 
-    <!-- Facebook Chat Plugin -->
-    <div id="fb-root"></div>
-
     <!-- Messenger Chat Plugin Code -->
+    <div id="fb-root"></div>
     <div id="fb-customer-chat" class="fb-customerchat"></div>
 
     <script>
-      var chatbox = document.getElementById("fb-customer-chat");
-      chatbox.setAttribute("attribution", "biz_inbox");
-      chatbox.setAttribute("page_id", "517579444770810");
-      chatbox.setAttribute("theme_color", "#0084ff");
-      chatbox.setAttribute("logged_in_greeting", "Hi! How can we help you?");
-      chatbox.setAttribute(
-        "logged_out_greeting",
-        "Hi! Please log in to chat with us."
-      );
-    </script>
-
-    <!-- Load Facebook SDK -->
-    <script>
+      // Delayed loading of Facebook SDK
       window.fbAsyncInit = function () {
         FB.init({
           xfbml: true,
-          version: "v17.0",
+          version: "v21.0",
           appId: "968976658430478",
         });
       };
-    </script>
-    <script
-      async
-      defer
-      crossorigin="anonymous"
-      src="https://connect.facebook.net/en_US/sdk.js"
-    ></script>
 
-    <!-- Initialize Chat Plugin -->
-    <script>
-      (function loadChatPlugin() {
-        try {
-          const script = document.createElement("script");
-          script.async = true;
-          script.defer = true;
-          script.crossOrigin = "anonymous";
-          script.src =
-            "https://connect.facebook.net/en_US/sdk/xfbml.customerchat.js";
-          document.body.appendChild(script);
-        } catch (error) {
-          console.error("Error loading chat plugin:", error);
-        }
-      })();
+      // Configure chat widget
+      var chatbox = document.getElementById("fb-customer-chat");
+      chatbox.setAttribute("attribution", "biz_inbox");
+      chatbox.setAttribute("page_id", "517579444770810");
+
+      // Load Facebook SDK
+      (function (d, s, id) {
+        var js,
+          fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s);
+        js.id = id;
+        js.src = "https://connect.facebook.net/en_US/sdk.js";
+        fjs.parentNode.insertBefore(js, fjs);
+      })(document, "script", "facebook-jssdk");
     </script>
   </body>
 </html>
