@@ -27,7 +27,6 @@ function App() {
     </Routes>
     <Footer />
     <GoToTop />
-    <div id="fb-root"><Chat /></div>
   </>;
 }
 export default App;
