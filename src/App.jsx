@@ -18,11 +18,14 @@ function App() {
     {/* <FacebookMessengerChat pageId='517579444770810' appId='968976658430478' /> */}
     <MessengerChat />
     <Routes>
-      <Route path="/" element={<Home />} />
+      {/* <Route path="/" element={<Home />} />
       <Route path="/recipe" element={<Recipe />} />
       <Route path="/recipe/des/:id" element={<Description />} />
       <Route path="/submitRecipe" element={<RecipeForm />} />
-      <Route path="/about" element={<About />} />
+      <Route path="/about" element={<About />} /> */}
+      <div className="h-screen bg-black">
+
+      </div>
       <Route path="/privacy-policy" element={<PrivacyPolicy />} />
     </Routes>
     <Footer />
