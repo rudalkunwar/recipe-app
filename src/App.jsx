@@ -17,7 +17,6 @@ function App() {
     <Navbar />
     {/* <FacebookMessengerChat pageId='517579444770810' appId='968976658430478' /> */}
     {/* <MessengerChat /> */}
-    <ChatBot />
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/recipe" element={<Recipe />} />
