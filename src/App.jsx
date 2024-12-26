@@ -16,7 +16,7 @@ function App() {
   return < >
     <Navbar />
     {/* <FacebookMessengerChat pageId='517579444770810' appId='968976658430478' /> */}
-    {/* <MessengerChat /> */}
+    <MessengerChat />
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/recipe" element={<Recipe />} />
@@ -27,14 +27,6 @@ function App() {
     </Routes>
     <Footer />
     <GoToTop />
-    <div id="fb-root"><Chat /></div>
   </>;
 }
-const Chat = () => (
-  <div className="fb-customerchat"
-    attribution="setup_tool"
-    page_id="517579444770810"
-    theme_color="#20cef5">
-  </div>
-)
 export default App;
