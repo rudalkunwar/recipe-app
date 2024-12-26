@@ -14,7 +14,7 @@ import FacebookMessengerChat from "./component/FacebookMessengerChat";
 import ChatBot from "./component/ChatBot";
 function App() {
   return < >
-    <Navbar />
+    {/* <Navbar /> */}
     {/* <FacebookMessengerChat pageId='517579444770810' appId='968976658430478' /> */}
     <MessengerChat />
     <Routes>
