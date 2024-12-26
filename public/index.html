@@ -18,30 +18,30 @@
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
 
-    <!-- Messenger Chat Plugin Code -->
-    <div id="fb-root"></div>
-    <div id="fb-customer-chat" class="fb-customerchat"></div>
+    <!-- Facebook Messenger Plugin -->
+    <div
+      class="fb-customerchat"
+      page_id="517579444770810"
+      ref="custom-data"
+      minimized="false"
+    ></div>
 
     <script>
-      // Delayed loading of Facebook SDK
       window.fbAsyncInit = function () {
         FB.init({
+          appId: "1678638095724206", // REPLACE IF YOU WANT TO USE YOUR OWN FB APP
+          autoLogAppEvents: true,
           xfbml: true,
-          version: "v21.0",
-          appId: "968976658430478",
+          version: "v2.11",
         });
       };
 
-      // Configure chat widget
-      var chatbox = document.getElementById("fb-customer-chat");
-      chatbox.setAttribute("attribution", "biz_inbox");
-      chatbox.setAttribute("page_id", "517579444770810");
-
-      // Load Facebook SDK
       (function (d, s, id) {
         var js,
           fjs = d.getElementsByTagName(s)[0];
-        if (d.getElementById(id)) return;
+        if (d.getElementById(id)) {
+          return;
+        }
         js = d.createElement(s);
         js.id = id;
         js.src = "https://connect.facebook.net/en_US/sdk.js";
