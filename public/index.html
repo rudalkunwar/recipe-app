@@ -21,33 +21,38 @@
 
     <!-- Facebook Chat Plugin -->
     <div id="fb-root"></div>
-    <script
-      async
-      defer
-      crossorigin="anonymous"
-      src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v17.0&appId=968976658430478&autoLogAppEvents=1"
-    ></script>
-    <div
-      class="fb-customerchat"
-      attribution="setup_tool"
-      page_id="517579444770810"
-      theme_color="#0084ff"
-      logged_in_greeting="Hi! How can we help you?"
-      logged_out_greeting="Hi! Please log in to chat with us."
-    ></div>
+
+    <!-- Messenger Chat Plugin Code -->
+    <div id="fb-customer-chat" class="fb-customerchat"></div>
 
     <script>
+      var chatbox = document.getElementById("fb-customer-chat");
+      chatbox.setAttribute("attribution", "biz_inbox");
+      chatbox.setAttribute("page_id", "517579444770810");
+      chatbox.setAttribute("theme_color", "#0084ff");
+      chatbox.setAttribute("logged_in_greeting", "Hi! How can we help you?");
+      chatbox.setAttribute(
+        "logged_out_greeting",
+        "Hi! Please log in to chat with us."
+      );
+
       window.fbAsyncInit = function () {
         FB.init({
-          appId: "968976658430478", // Replace with your App ID if different
-          autoLogAppEvents: true,
           xfbml: true,
           version: "v17.0",
+          appId: "968976658430478",
         });
-
-        // Parse XFBML (optional, only needed if issues arise)
-        FB.XFBML.parse();
       };
+
+      (function (d, s, id) {
+        var js,
+          fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s);
+        js.id = id;
+        js.src = "https://connect.facebook.net/en_US/sdk/xfbml.customerchat.js";
+        fjs.parentNode.insertBefore(js, fjs);
+      })(document, "script", "facebook-jssdk");
     </script>
     <!-- End of Facebook Chat Plugin -->
   </body>
