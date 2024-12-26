@@ -18,88 +18,37 @@
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
     <!-- React app will mount here -->
-    <!-- Start of LiveChat (www.livechat.com) code -->
-    <!-- <script>
-      window.__lc = window.__lc || {};
-      window.__lc.license = 18959102;
-      window.__lc.integration_name = "manual_channels";
-      window.__lc.product_name = "livechat";
-      (function (n, t, c) {
-        function i(n) {
-          return e._h ? e._h.apply(null, n) : e._q.push(n);
-        }
-        var e = {
-          _q: [],
-          _h: null,
-          _v: "2.0",
-          on: function () {
-            i(["on", c.call(arguments)]);
-          },
-          once: function () {
-            i(["once", c.call(arguments)]);
-          },
-          off: function () {
-            i(["off", c.call(arguments)]);
-          },
-          get: function () {
-            if (!e._h)
-              throw new Error(
-                "[LiveChatWidget] You can't use getters before load."
-              );
-            return i(["get", c.call(arguments)]);
-          },
-          call: function () {
-            i(["call", c.call(arguments)]);
-          },
-          init: function () {
-            var n = t.createElement("script");
-            (n.async = !0),
-              (n.type = "text/javascript"),
-              (n.src = "https://cdn.livechatinc.com/tracking.js"),
-              t.head.appendChild(n);
-          },
-        };
-        !n.__lc.asyncInit && e.init(),
-          (n.LiveChatWidget = n.LiveChatWidget || e);
-      })(window, document, [].slice);
-    </script> -->
-    <!-- <noscript
-      ><a href="https://www.livechat.com/chat-with/18959102/" rel="nofollow"
-        >Chat with us</a
-      >, powered by
-      <a
-        href="https://www.livechat.com/?welcome"
-        rel="noopener nofollow"
-        target="_blank"
-        >LiveChat</a
-      ></noscript
-    > -->
-    <!-- End of LiveChat code -->
-    <!--Start of Tawk.to Script-->
-    <!-- <script type="text/javascript">
-  var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
-  (function(){
-  var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-  s1.async=true;
-  s1.src='https://embed.tawk.to/676cf7fcaf5bfec1dbe21dde/1ig0qhd46';
-  s1.charset='UTF-8';
-  s1.setAttribute('crossorigin','*');
-  s0.parentNode.insertBefore(s1,s0);
-  })();
-  </script> -->
-    <!-- End of Tawk.to Script -->
 
+    <!-- Facebook Chat Plugin -->
     <div id="fb-root"></div>
     <script
       async
       defer
       crossorigin="anonymous"
-      src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v21.0&appId=968976658430478&autoLogAppEvents=1"
+      src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v17.0&appId=968976658430478&autoLogAppEvents=1"
     ></script>
     <div
       class="fb-customerchat"
       attribution="setup_tool"
       page_id="517579444770810"
+      theme_color="#0084ff"
+      logged_in_greeting="Hi! How can we help you?"
+      logged_out_greeting="Hi! Please log in to chat with us."
     ></div>
+
+    <script>
+      window.fbAsyncInit = function () {
+        FB.init({
+          appId: "968976658430478", // Replace with your App ID if different
+          autoLogAppEvents: true,
+          xfbml: true,
+          version: "v17.0",
+        });
+
+        // Parse XFBML (optional, only needed if issues arise)
+        FB.XFBML.parse();
+      };
+    </script>
+    <!-- End of Facebook Chat Plugin -->
   </body>
 </html>
