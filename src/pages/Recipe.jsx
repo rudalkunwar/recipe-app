@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import axios from "../utils/axiosInstance";
 import { useNavigate } from "react-router-dom";
 
@@ -21,10 +21,12 @@ const Recipe = () => {
     return "Search by dish name to discover recipes.";
   }, [error, hasResults, loading, mealName]);
 
-  const fetchRecipes = async () => {
-    if (!mealName.trim()) {
-      setError("Please enter a meal name to search.");
+  const fetchRecipes = useCallback(async (searchTerm) => {
+    const query = searchTerm.trim();
+
+    if (!query) {
       setRecipes([]);
+      setError("");
       return;
     }
 
@@ -32,7 +34,7 @@ const Recipe = () => {
     setError("");
 
     try {
-      const response = await axios.get(`/search.php?s=${mealName}`);
+      const response = await axios.get(`/search.php?s=${encodeURIComponent(query)}`);
       setRecipes(response.data?.meals ?? []);
 
       if (!response.data?.meals) {
@@ -45,13 +47,21 @@ const Recipe = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, []);
 
   const handleKeyDown = (e) => {
     if (e.key === "Enter") {
-      fetchRecipes();
+      fetchRecipes(mealName);
     }
   };
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      fetchRecipes(mealName);
+    }, 300);
+
+    return () => clearTimeout(timer);
+  }, [fetchRecipes, mealName]);
 
   const getRecipeExcerpt = (instructions = "") => {
     const normalized = instructions.replace(/\s+/g, " ").trim();
@@ -87,7 +97,11 @@ const Recipe = () => {
               placeholder="Try 'Pasta', 'Chicken', or 'Soup'"
               className="flex-1 h-12 px-4 rounded-xl border border-slate-300 bg-white text-slate-900 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
-            <button onClick={fetchRecipes} disabled={loading} className="btn-primary h-12">
+            <button
+              onClick={() => fetchRecipes(mealName)}
+              disabled={loading}
+              className="btn-primary h-12"
+            >
               {loading ? "Searching..." : "Search Recipes"}
             </button>
           </div>
