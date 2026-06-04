@@ -34,7 +34,6 @@ function Home() {
           />
           <div className="absolute inset-0 bg-slate-950/55" />
           <div className="absolute inset-0 bg-gradient-to-br from-slate-950/85 via-slate-950/40 to-slate-900/35" />
-          <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-slate-50 to-transparent" />
         </div>
 
         <div className="content-container relative z-10 py-16">
