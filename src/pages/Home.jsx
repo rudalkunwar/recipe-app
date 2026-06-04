@@ -1,150 +1,121 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React from "react";
+import { Link } from "react-router-dom";
 
 function Home() {
   const features = [
     {
-      imgSrc: "https://img.icons8.com/ios-filled/50/000000/search.png",
-      title: "Search Recipes",
-      description: "Easily search for recipes based on ingredients or meal types."
+      title: "Smart Recipe Search",
+      description:
+        "Find meal ideas fast by typing dish names and exploring curated recipe cards.",
+      icon: "🔎",
     },
     {
-      imgSrc: "https://img.icons8.com/ios-filled/50/000000/star.png",
-      title: "Save Favorites",
-      description: "Bookmark your favorite recipes for easy access anytime."
+      title: "Clear Step-by-Step Details",
+      description:
+        "Open any recipe to see ingredients and instructions in an easy-to-follow format.",
+      icon: "📋",
     },
     {
-      imgSrc: "https://img.icons8.com/ios-filled/50/000000/food-bar.png",
-      title: "Explore Cuisines",
-      description: "Discover new cuisines and exciting dishes from around the world."
-    }
+      title: "Share Your Own Dishes",
+      description:
+        "Submit your favorite recipes and inspire the RecipeApp cooking community.",
+      icon: "🍲",
+    },
   ];
 
   return (
-    <div className="bg-white">
-      {/* Hero Section */}
-      <div className="relative min-h-screen flex items-center">
+    <div className="bg-slate-50">
+      <section className="relative min-h-screen flex items-center overflow-hidden">
         <div className="absolute inset-0">
           <img
             src="/images/bg-home.jpeg"
-            alt="Food Background"
-            className="w-full h-full object-cover"
+            alt="Fresh ingredients on a kitchen table"
+            className="w-full h-full object-cover object-center"
           />
-          <div className="absolute inset-0 bg-gray-900/60 backdrop-blur-sm"></div>
+          <div className="absolute inset-0 bg-slate-950/55" />
+          <div className="absolute inset-0 bg-gradient-to-br from-slate-950/85 via-slate-950/40 to-slate-900/35" />
         </div>
 
-        <div className="relative z-10 w-full">
-          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white animate-fade-in">
-              Welcome to RecipeApp
-            </h1>
-            <p className="mt-6 text-xl text-gray-200">
-              Discover a world of delicious recipes at your fingertips.
+        <div className="content-container relative z-10 py-16">
+          <div className="max-w-3xl text-white">
+            <p className="uppercase tracking-[0.18em] text-xs sm:text-sm text-blue-200 font-semibold">
+              Cook Better Every Day
             </p>
-            <div className="mt-8">
-              <Link
-                to="/recipe"
-                className="inline-block px-8 py-4 rounded-lg bg-white text-gray-900 text-lg font-medium hover:bg-gray-100 transition-all duration-200 transform hover:scale-105 hover:shadow-xl"
-              >
+            <h1 className="mt-4 text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight">
+              Discover recipes you can actually cook tonight.
+            </h1>
+            <p className="mt-6 text-base sm:text-lg text-slate-200 max-w-2xl">
+              Search meals, open detailed instructions, and explore ingredients with a
+              cleaner recipe experience on every device.
+            </p>
+            <div className="mt-8 flex flex-wrap gap-3">
+              <Link to="/recipe" className="btn-primary">
                 Explore Recipes
+              </Link>
+              <Link to="/submitRecipe" className="btn-secondary">
+                Submit Recipe
               </Link>
             </div>
           </div>
         </div>
-      </div>
+      </section>
 
-      {/* Features Section */}
-      <div className="py-16 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center">
-            <h2 className="text-3xl font-extrabold text-gray-900">
-              Why Choose RecipeApp?
-            </h2>
-            <p className="mt-4 text-xl text-gray-600">
-              Explore our key features that make cooking fun and easy!
+      <section className="py-16 sm:py-20">
+        <div className="content-container">
+          <div className="text-center max-w-2xl mx-auto">
+            <h2 className="section-title">Why home cooks use RecipeApp</h2>
+            <p className="section-subtitle">
+              Built for fast browsing, readable instructions, and smooth mobile cooking.
             </p>
           </div>
 
-          <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6">
             {features.map((feature) => (
-              <div
+              <article
                 key={feature.title}
-                className="bg-white rounded-xl shadow-lg p-8 transition-all duration-300 hover:shadow-xl hover:transform hover:scale-105"
+                className="card-surface p-6 sm:p-7 h-full transition-all duration-200 hover:-translate-y-1 hover:shadow-md"
               >
-                <img src={feature.imgSrc} alt="" className="w-12 h-12 mx-auto" />
-                <h3 className="mt-6 text-xl font-semibold text-gray-900 text-center">
-                  {feature.title}
-                </h3>
-                <p className="mt-4 text-gray-600 text-center">
-                  {feature.description}
-                </p>
-              </div>
+                <div className="w-12 h-12 rounded-xl bg-blue-50 text-2xl flex items-center justify-center">
+                  <span role="img" aria-label={feature.title}>
+                    {feature.icon}
+                  </span>
+                </div>
+                <h3 className="mt-5 text-xl font-semibold text-slate-900">{feature.title}</h3>
+                <p className="mt-3 text-slate-600 leading-relaxed">{feature.description}</p>
+              </article>
             ))}
           </div>
         </div>
-      </div>
+      </section>
 
-      {/* CTA Section */}
-      <div className="relative py-16 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div className="order-2 lg:order-1">
-              <h2 className="text-3xl sm:text-4xl font-extrabold text-gray-900">
-                Start Your Cooking Adventure Now!
-              </h2>
-              <p className="mt-4 text-xl text-gray-600">
-                Join RecipeApp and explore culinary wonders from around the world.
+      <section className="py-16 sm:py-20 bg-white border-y border-slate-200">
+        <div className="content-container">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+            <div>
+              <h2 className="section-title">Plan meals with confidence</h2>
+              <p className="section-subtitle">
+                Browse recipe collections, compare dishes, and pick your next meal with
+                better visual structure and faster navigation.
               </p>
-              <div className="mt-8">
-                <Link
-                  to="/recipe"
-                  className="inline-block px-8 py-4 rounded-lg bg-blue-600 text-white text-lg font-medium hover:bg-blue-700 transition-all duration-200"
-                >
+              <div className="mt-7 flex flex-wrap gap-3">
+                <Link to="/recipe" className="btn-primary">
                   Get Started
                 </Link>
-              </div>
-            </div>
-            <div className="order-1 lg:order-2">
-              <img
-                src="/images/cookingillu.png"
-                alt="Cooking Illustration"
-                className="w-full h-auto rounded-lg shadow-xl"
-              />
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Share Recipe Section */}
-      <div className="bg-gray-50 py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div>
-              <img
-                src="/images/shareRecipe.png"
-                alt="Share Recipe"
-                className="w-full h-auto rounded-lg shadow-xl"
-              />
-            </div>
-            <div className="text-center lg:text-left">
-              <h2 className="text-3xl font-extrabold text-gray-900">
-                Share Your Recipe!
-              </h2>
-              <p className="mt-4 text-xl text-gray-600">
-                Have a delicious recipe? Share it with our community and inspire others!
-              </p>
-              <div className="mt-8">
-                <Link
-                  to="/submitRecipe"
-                  className="inline-block px-8 py-4 rounded-lg bg-green-600 text-white text-lg font-medium hover:bg-green-700 transition-all duration-200"
-                >
-                  Submit Recipe
+                <Link to="/about" className="btn-secondary">
+                  Learn More
                 </Link>
               </div>
             </div>
+            <div>
+              <img
+                src="/images/cookingillu.png"
+                alt="Cooking illustration"
+                className="w-full h-auto rounded-2xl shadow-md border border-slate-200"
+              />
+            </div>
           </div>
         </div>
-      </div>
+      </section>
     </div>
   );
 }

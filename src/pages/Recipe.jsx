@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 import axios from "../utils/axiosInstance";
 import { useNavigate } from "react-router-dom";
 
@@ -10,113 +10,145 @@ const Recipe = () => {
 
   const nav = useNavigate();
 
+  const hasResults = recipes.length > 0;
+
+  const emptyStateMessage = useMemo(() => {
+    if (loading) return "Searching recipes...";
+    if (error) return error;
+    if (mealName.trim() && !hasResults) {
+      return "No recipes matched your search. Try a different meal name.";
+    }
+    return "Search by dish name to discover recipes.";
+  }, [error, hasResults, loading, mealName]);
+
   const fetchRecipes = async () => {
     if (!mealName.trim()) {
-      setError("Please enter a meal name");
+      setError("Please enter a meal name to search.");
+      setRecipes([]);
       return;
     }
 
     setLoading(true);
     setError("");
+
     try {
       const response = await axios.get(`/search.php?s=${mealName}`);
-      if (response.data.meals) {
-        setRecipes(response.data.meals);
-      } else {
-        setError("No meals found. Please try a different name.");
+      setRecipes(response.data?.meals ?? []);
+
+      if (!response.data?.meals) {
+        setError("No meals found. Try another name.");
       }
     } catch (err) {
-      setError("Failed to fetch recipes. Please try again later.");
+      setError("Failed to fetch recipes. Please try again.");
+      setRecipes([]);
       console.error(err);
     } finally {
       setLoading(false);
     }
   };
 
-  const handleKeyPress = (e) => {
+  const handleKeyDown = (e) => {
     if (e.key === "Enter") {
       fetchRecipes();
     }
   };
 
+  const getRecipeExcerpt = (instructions = "") => {
+    const normalized = instructions.replace(/\s+/g, " ").trim();
+    if (!normalized) return "Instructions are not available for this recipe yet.";
+    if (normalized.length <= 150) return normalized;
+    return `${normalized.slice(0, 147)}...`;
+  };
+
   return (
-    <div className="min-h-screen bg-gradient-to-b from-blue-100 to-blue-50 pt-20 pb-10">
-      <div className="max-w-7xl mx-auto px-4">
-        <div className="max-w-2xl mx-auto mb-8 text-center">
-          <div className="flex gap-3 mb-6 pt-4">
+    <div className="page-wrapper bg-gradient-to-b from-slate-100 to-slate-50">
+      <div className="content-container">
+        <div className="max-w-3xl mx-auto text-center card-surface p-6 sm:p-8">
+          <p className="uppercase text-xs font-semibold tracking-[0.16em] text-blue-700">
+            Recipe Search
+          </p>
+          <h1 className="mt-3 text-3xl sm:text-4xl font-bold text-slate-900">
+            Find your next favorite meal
+          </h1>
+          <p className="mt-3 text-slate-600">
+            Search recipes by meal name and open full cooking instructions instantly.
+          </p>
+
+          <div className="mt-6 flex flex-col sm:flex-row gap-3 text-left">
+            <label htmlFor="meal-search" className="sr-only">
+              Search meal name
+            </label>
             <input
+              id="meal-search"
               type="text"
               value={mealName}
               onChange={(e) => setMealName(e.target.value)}
-              onKeyPress={handleKeyPress}
-              placeholder="Enter meal name (e.g., Pasta, Chicken)"
-              className="flex-1 h-14 px-5 rounded-lg border border-gray-300 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              onKeyDown={handleKeyDown}
+              placeholder="Try 'Pasta', 'Chicken', or 'Soup'"
+              className="flex-1 h-12 px-4 rounded-xl border border-slate-300 bg-white text-slate-900 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
-            <button
-              onClick={fetchRecipes}
-              disabled={loading}
-              className="h-14 px-8 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed"
-            >
-              {loading ? (
-                <div className="w-6 h-6 border-2 border-white border-t-transparent rounded-full animate-spin" />
-              ) : (
-                "Search"
-              )}
+            <button onClick={fetchRecipes} disabled={loading} className="btn-primary h-12">
+              {loading ? "Searching..." : "Search Recipes"}
             </button>
           </div>
 
           {error && (
-            <div className="mb-6 p-4 bg-red-50 border border-red-200 text-red-600 rounded-lg">
+            <p
+              role="alert"
+              className="mt-4 rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-red-700 text-sm"
+            >
               {error}
-            </div>
+            </p>
           )}
         </div>
 
-        {recipes.length > 0 && (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {recipes.map((meal) => (
-              <div
-                key={meal.idMeal}
-                className="relative bg-white rounded-lg overflow-hidden shadow-lg transition-transform duration-500 hover:scale-105 group"
-              >
-                <div className="relative">
+        {!hasResults && (
+          <div className="max-w-3xl mx-auto mt-8 card-surface p-6 text-center text-slate-600">
+            {loading ? (
+              <div className="flex justify-center items-center gap-3 text-blue-700">
+                <div className="w-5 h-5 border-2 border-blue-600 border-t-transparent rounded-full animate-spin" />
+                <span>{emptyStateMessage}</span>
+              </div>
+            ) : (
+              <p>{emptyStateMessage}</p>
+            )}
+          </div>
+        )}
+
+        {hasResults && (
+          <section className="mt-10">
+            <h2 className="text-xl font-semibold text-slate-900 mb-5">
+              {recipes.length} recipe{recipes.length === 1 ? "" : "s"} found
+            </h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6">
+              {recipes.map((meal) => (
+                <article
+                  key={meal.idMeal}
+                  className="card-surface overflow-hidden h-full flex flex-col transition-all duration-200 hover:shadow-md hover:-translate-y-1"
+                >
                   <img
                     src={meal.strMealThumb}
                     alt={meal.strMeal}
-                    className="w-full h-52 object-cover transition-transform duration-500"
+                    className="w-full h-52 object-cover"
+                    loading="lazy"
                   />
-                  <div className="absolute inset-0 bg-black opacity-0 group-hover:opacity-30 transition-opacity duration-300"></div>
-                </div>
-
-                <div className="relative p-5 bg-white">
-                  <h3 className="text-xl font-semibold mb-2 text-gray-900">
-                    {meal.strMeal}
-                  </h3>
-                  <p className="text-gray-600 line-clamp-3 mb-4">
-                    {meal.strInstructions}
-                  </p>
-                  <button
-                    onClick={() => nav(`/recipe/des/${meal.idMeal}`)}
-                    className="w-full py-2 px-4 bg-blue-50 text-blue-700 rounded-lg hover:bg-blue-100 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors duration-200"
-                  >
-                    View Recipe
-                  </button>
-                </div>
-              </div>
-            ))}
-          </div>
-        )}
-
-        {loading && (
-          <div className="flex justify-center items-center min-h-[200px]">
-            <div className="w-12 h-12 border-4 border-blue-600 border-t-transparent rounded-full animate-spin" />
-          </div>
-        )}
-
-        {!loading && !error && recipes.length === 0 && (
-          <div className="text-center text-gray-500 mt-8">
-            Search for a recipe to get started
-          </div>
+                  <div className="p-5 flex-1 flex flex-col">
+                    <h3 className="text-lg font-semibold text-slate-900">{meal.strMeal}</h3>
+                    <p className="mt-3 text-sm text-slate-600 leading-6 flex-1">
+                      {getRecipeExcerpt(meal.strInstructions)}
+                    </p>
+                    <button
+                      type="button"
+                      onClick={() => nav(`/recipe/des/${meal.idMeal}`)}
+                      className="mt-5 btn-secondary w-full"
+                    >
+                      View Recipe
+                    </button>
+                  </div>
+                </article>
+              ))}
+            </div>
+          </section>
         )}
       </div>
     </div>

@@ -2,67 +2,62 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 function About() {
-    return (
-        <div className="bg-gray-50 pt-18 min-h-screen text-gray-800">
-            {/* Container */}
-            <div className="max-w-7xl mx-auto px-4 py-10">
-                {/* About App Section */}
-                <section className="mb-12">
-                    <h2 className="text-3xl md:text-4xl font-bold text-green-600 mb-4">Welcome to Recipe App</h2>
-                    <p className="text-lg leading-relaxed text-gray-700">
-                        Recipe App is your go-to platform for discovering, sharing, and creating mouth-watering recipes.
-                        Whether you’re a seasoned chef or just starting your culinary journey, we provide a variety of recipes
-                        to inspire your next meal.
-                    </p>
-                </section>
+  return (
+    <div className="min-h-screen bg-slate-950 pt-20 text-slate-100">
+      <div className="mx-auto max-w-6xl px-4 py-10 sm:px-6 lg:px-8">
+        <section className="rounded-2xl border border-slate-800 bg-slate-900/60 p-8 shadow-xl">
+          <p className="mb-3 text-sm font-semibold uppercase tracking-[0.2em] text-blue-300">
+            About Recipe App
+          </p>
+          <h1 className="mb-4 text-3xl font-bold text-white md:text-4xl">
+            Cook confidently, discover constantly.
+          </h1>
+          <p className="max-w-3xl text-lg leading-relaxed text-slate-300">
+            Recipe App helps home cooks find inspiration fast. Explore curated dishes, dive into
+            detailed instructions, and discover meals that fit your taste, time, and comfort level.
+          </p>
+        </section>
 
-                {/* Mission Section */}
-                <section className="mb-10">
-                    <h3 className="text-2xl font-semibold text-gray-800 mb-3">Our Mission</h3>
-                    <p className="text-lg leading-relaxed text-gray-700">
-                        Our mission is to bring food lovers together by providing an easy-to-use platform where everyone can
-                        access delicious recipes, share their favorites, and learn new cooking techniques.
-                    </p>
-                </section>
+        <section className="mt-10 grid gap-6 md:grid-cols-3">
+          {[
+            {
+              title: "Simple Discovery",
+              description: "Browse recipes quickly with a clean, distraction-free experience.",
+            },
+            {
+              title: "Reliable Guidance",
+              description: "Get clear recipe details so every step in the kitchen feels easier.",
+            },
+            {
+              title: "Built for Everyday Cooking",
+              description: "From quick weeknight meals to weekend experiments, find what fits.",
+            },
+          ].map(({ title, description }) => (
+            <article
+              key={title}
+              className="rounded-xl border border-slate-800 bg-slate-900 p-6 shadow-md"
+            >
+              <h2 className="mb-2 text-xl font-semibold text-blue-300">{title}</h2>
+              <p className="text-slate-300">{description}</p>
+            </article>
+          ))}
+        </section>
 
-                {/* Feature Highlights */}
-                <section className="mb-10">
-                    <h3 className="text-2xl font-semibold text-gray-800 mb-6">Why Choose Us?</h3>
-                    <div className="grid md:grid-cols-3 gap-6">
-                        <div className="p-6 bg-white shadow-md rounded-lg">
-                            <h4 className="text-xl font-semibold text-green-600 mb-2">Easy to Use</h4>
-                            <p className="text-gray-700">
-                                A simple and intuitive interface for browsing and sharing recipes effortlessly.
-                            </p>
-                        </div>
-                        <div className="p-6 bg-white shadow-md rounded-lg">
-                            <h4 className="text-xl font-semibold text-green-600 mb-2">Vast Recipe Collection</h4>
-                            <p className="text-gray-700">
-                                Discover thousands of recipes for every taste and dietary preference.
-                            </p>
-                        </div>
-                        <div className="p-6 bg-white shadow-md rounded-lg">
-                            <h4 className="text-xl font-semibold text-green-600 mb-2">Community Driven</h4>
-                            <p className="text-gray-700">
-                                Share your own recipes and connect with food enthusiasts worldwide.
-                            </p>
-                        </div>
-                    </div>
-                </section>
-
-                {/* Call-to-Action Section */}
-                <section className="text-center">
-                    <h3 className="text-2xl font-semibold mb-4">Join Our Community</h3>
-                    <p className="text-lg mb-6 text-gray-700">
-                        Start exploring recipes, sharing your favorites, and cooking like a pro today!
-                    </p>
-                    <Link to='/recipe' className="bg-green-600 text-white px-6 py-3 rounded-full text-lg hover:bg-green-700 transition duration-300">
-                        Explore Recipes
-                    </Link>
-                </section>
-            </div>
-        </div>
-    );
+        <section className="mt-10 rounded-2xl border border-blue-500/30 bg-gradient-to-r from-blue-600/15 via-slate-900 to-indigo-600/10 p-8 text-center">
+          <h2 className="mb-3 text-2xl font-semibold text-white">Ready to find your next dish?</h2>
+          <p className="mb-6 text-slate-200">
+            Explore recipe ideas and turn ingredients you already have into something great.
+          </p>
+          <Link
+            to="/recipe"
+            className="inline-flex items-center rounded-full bg-blue-500 px-6 py-3 text-base font-semibold text-white transition hover:bg-blue-400"
+          >
+            Explore Recipes
+          </Link>
+        </section>
+      </div>
+    </div>
+  );
 }
 
 export default About;
