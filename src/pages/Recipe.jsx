@@ -32,7 +32,6 @@ const Recipe = () => {
 
     setLoading(true);
     setError("");
-    setRecipes([]);
 
     try {
       const response = await axios.get(`/search.php?s=${encodeURIComponent(query)}`);
