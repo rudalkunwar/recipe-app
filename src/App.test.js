@@ -6,6 +6,8 @@ jest.mock("./utils/axiosInstance", () => ({
   get: jest.fn(() => Promise.resolve({ data: { meals: [] } })),
 }));
 
+jest.mock("./component/MessengerChat", () => () => null);
+
 test("renders Recipe App branding", () => {
   render(
     <MemoryRouter>
