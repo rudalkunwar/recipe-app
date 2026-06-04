@@ -1,8 +1,17 @@
-import { render, screen } from '@testing-library/react';
-import App from './App';
+import { render, screen } from "@testing-library/react";
+import { MemoryRouter } from "react-router-dom";
+import App from "./App";
 
-test('renders learn react link', () => {
-  render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+jest.mock("./utils/axiosInstance", () => ({
+  get: jest.fn(() => Promise.resolve({ data: { meals: [] } })),
+}));
+
+test("renders Recipe App branding", () => {
+  render(
+    <MemoryRouter>
+      <App />
+    </MemoryRouter>
+  );
+
+  expect(screen.getByText(/recipe app/i)).toBeInTheDocument();
 });
