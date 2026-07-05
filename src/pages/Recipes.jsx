@@ -4,6 +4,8 @@ import { Search, SlidersHorizontal, X, Loader2, Salad, ChevronDown } from "lucid
 import { searchMeals, getCategoryList, getAreaList, filterByCategory, filterByArea } from "../utils/api";
 import RecipeCard from "../components/RecipeCard";
 
+const PER_PAGE = 9;
+
 const FILTERS = [
   { key: "category", label: "Category", getOptions: getCategoryList, mapFn: (m) => m.strCategory },
   { key: "area", label: "Cuisine", getOptions: getAreaList, mapFn: (m) => m.strArea },
@@ -71,6 +73,9 @@ export default function Recipes() {
     category: searchParams.get("category") || "",
     area: searchParams.get("area") || "",
   }));
+  const [visibleCount, setVisibleCount] = useState(PER_PAGE);
+  const [loadingMore, setLoadingMore] = useState(false);
+  const sentinelRef = useRef(null);
 
   const hasFilters = Object.values(activeFilters).some(Boolean);
 
@@ -84,6 +89,7 @@ export default function Recipes() {
 
   const fetchResults = useCallback(async (q, filters) => {
     setLoading(true);
+    setVisibleCount(PER_PAGE);
     try {
       let results;
       if (filters.category) {
@@ -112,6 +118,27 @@ export default function Recipes() {
     }
   }, [searchParams, fetchResults]);
 
+  useEffect(() => {
+    const sentinel = sentinelRef.current;
+    if (!sentinel) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && visibleCount < meals.length && !loadingMore) {
+          setLoadingMore(true);
+          requestAnimationFrame(() => {
+            setVisibleCount((prev) => Math.min(prev + PER_PAGE, meals.length));
+            setLoadingMore(false);
+          });
+        }
+      },
+      { rootMargin: "200px" }
+    );
+
+    observer.observe(sentinel);
+    return () => observer.disconnect();
+  }, [visibleCount, meals.length, loadingMore]);
+
   const handleSearch = (e) => {
     e.preventDefault();
     const params = {};
@@ -131,8 +158,6 @@ export default function Recipes() {
     setSearchParams({});
     setMeals([]);
   };
-
-  const count = meals.length;
 
   return (
     <div className="page-container">
@@ -185,22 +210,55 @@ export default function Recipes() {
 
         <div className="mt-12">
           {loading ? (
-            <div className="flex items-center justify-center gap-3 py-24 text-surface-500">
-              <Loader2 size={20} className="animate-spin text-brand-400" />
-              <span>Searching recipes...</span>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+              {Array.from({ length: 6 }).map((_, i) => (
+                <div key={i} className="card-accent overflow-hidden animate-pulse">
+                  <div className="aspect-[4/3] bg-white/[0.04]" />
+                  <div className="p-5 space-y-3">
+                    <div className="h-5 bg-white/[0.06] rounded-lg w-3/4" />
+                    <div className="space-y-2">
+                      <div className="h-3 bg-white/[0.04] rounded-lg w-full" />
+                      <div className="h-3 bg-white/[0.04] rounded-lg w-5/6" />
+                    </div>
+                    <div className="pt-4 border-t border-white/[0.04]">
+                      <div className="h-3 bg-white/[0.04] rounded-lg w-20" />
+                    </div>
+                  </div>
+                </div>
+              ))}
             </div>
           ) : meals.length > 0 ? (
             <>
               <div className="flex items-center justify-between mb-6">
                 <p className="text-sm text-surface-600">
-                  <span className="text-white font-semibold">{count}</span> {count === 1 ? "recipe" : "recipes"} found
+                  <span className="text-white font-semibold">{meals.length}</span> {meals.length === 1 ? "recipe" : "recipes"} found
                 </p>
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-                {meals.map((meal, i) => (
+                {meals.slice(0, visibleCount).map((meal, i) => (
                   <RecipeCard key={meal.idMeal} meal={meal} index={i} />
                 ))}
               </div>
+
+              {visibleCount < meals.length && (
+                <div ref={sentinelRef} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 mt-5">
+                  {Array.from({ length: Math.min(PER_PAGE, meals.length - visibleCount) }).map((_, i) => (
+                    <div key={i} className="card-accent overflow-hidden animate-pulse">
+                      <div className="aspect-[4/3] bg-white/[0.04]" />
+                      <div className="p-5 space-y-3">
+                        <div className="h-5 bg-white/[0.06] rounded-lg w-3/4" />
+                        <div className="space-y-2">
+                          <div className="h-3 bg-white/[0.04] rounded-lg w-full" />
+                          <div className="h-3 bg-white/[0.04] rounded-lg w-5/6" />
+                        </div>
+                        <div className="pt-4 border-t border-white/[0.04]">
+                          <div className="h-3 bg-white/[0.04] rounded-lg w-20" />
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
             </>
           ) : searchParams.toString() ? (
             <div className="card-accent-wine p-12 text-center max-w-lg mx-auto">

@@ -49,11 +49,13 @@ export default function Home() {
   const [featured, setFeatured] = useState(null);
   const [categories, setCategories] = useState([]);
   const [randomMeals, setRandomMeals] = useState([]);
+  const [loadingMeals, setLoadingMeals] = useState(true);
+  const [loadingCategories, setLoadingCategories] = useState(true);
   const heroRef = useScrollReveal();
 
   useEffect(() => {
     getRandomMeal().then(setFeatured);
-    getCategories().then(setCategories);
+    getCategories().then((cats) => { setCategories(cats); setLoadingCategories(false); });
     const fetchRandoms = async () => {
       const meals = [];
       const seen = new Set();
@@ -62,6 +64,7 @@ export default function Home() {
         if (m && !seen.has(m.idMeal)) { seen.add(m.idMeal); meals.push(m); }
       }
       setRandomMeals(meals);
+      setLoadingMeals(false);
     };
     fetchRandoms();
   }, []);
@@ -203,26 +206,33 @@ export default function Home() {
           />
 
           <div className="mt-10 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
-            {categories.slice(0, 12).map((cat, i) => (
-              <Link
-                key={cat.idCategory}
-                to={`/recipes?category=${encodeURIComponent(cat.strCategory)}`}
-                className="card-accent p-5 text-center group scroll-reveal"
-                style={{ transitionDelay: `${i * 60}ms` }}
-              >
-                <div className="relative w-16 h-16 mx-auto">
-                  <div className="absolute inset-0 rounded-full bg-brand-500/10 blur-sm group-hover:blur-md transition-all" />
-                  <img
-                    src={cat.strCategoryThumb}
-                    alt={cat.strCategory}
-                    className="relative w-full h-full object-cover rounded-full ring-1 ring-white/[0.06] group-hover:ring-brand-500/30 transition-all group-hover:scale-110 duration-300"
-                  />
-                </div>
-                <p className="mt-3 text-sm font-semibold text-surface-400 group-hover:text-brand-300 transition-colors">
-                  {cat.strCategory}
-                </p>
-              </Link>
-            ))}
+            {loadingCategories
+              ? Array.from({ length: 6 }).map((_, i) => (
+                  <div key={i} className="card-accent p-5 text-center animate-pulse">
+                    <div className="w-16 h-16 mx-auto rounded-full bg-white/[0.06]" />
+                    <div className="mt-3 h-3 bg-white/[0.06] rounded-lg w-16 mx-auto" />
+                  </div>
+                ))
+              : categories.slice(0, 12).map((cat) => (
+                  <Link
+                    key={cat.idCategory}
+                    to={`/recipes?category=${encodeURIComponent(cat.strCategory)}`}
+                    className="card-accent p-5 text-center group"
+                  >
+                    <div className="relative w-16 h-16 mx-auto">
+                      <div className="absolute inset-0 rounded-full bg-brand-500/10 blur-sm group-hover:blur-md transition-all" />
+                      <img
+                        src={cat.strCategoryThumb}
+                        alt={cat.strCategory}
+                        className="relative w-full h-full object-cover rounded-full ring-1 ring-white/[0.06] group-hover:ring-brand-500/30 transition-all group-hover:scale-110 duration-300"
+                      />
+                    </div>
+                    <p className="mt-3 text-sm font-semibold text-surface-400 group-hover:text-brand-300 transition-colors">
+                      {cat.strCategory}
+                    </p>
+                  </Link>
+                ))
+            }
           </div>
         </div>
       </Reveal>
@@ -246,9 +256,26 @@ export default function Home() {
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-            {randomMeals.map((meal, i) => (
-              <RecipeCard key={meal.idMeal} meal={meal} index={i} />
-            ))}
+            {loadingMeals
+              ? Array.from({ length: 6 }).map((_, i) => (
+                  <div key={i} className="card-accent overflow-hidden animate-pulse">
+                    <div className="aspect-[4/3] bg-white/[0.04]" />
+                    <div className="p-5 space-y-3">
+                      <div className="h-5 bg-white/[0.06] rounded-lg w-3/4" />
+                      <div className="space-y-2">
+                        <div className="h-3 bg-white/[0.04] rounded-lg w-full" />
+                        <div className="h-3 bg-white/[0.04] rounded-lg w-5/6" />
+                      </div>
+                      <div className="pt-4 border-t border-white/[0.04]">
+                        <div className="h-3 bg-white/[0.04] rounded-lg w-20" />
+                      </div>
+                    </div>
+                  </div>
+                ))
+              : randomMeals.map((meal, i) => (
+                  <RecipeCard key={meal.idMeal} meal={meal} index={i} />
+                ))
+            }
           </div>
 
           <div className="mt-8 text-center sm:hidden">

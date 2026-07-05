@@ -8,7 +8,7 @@ export default function RecipeCard({ meal, index = 0, wide = false }) {
   return (
     <article
       ref={ref}
-      style={{ transitionDelay: `${index * 100}ms` }}
+      style={{ transitionDelay: `${Math.min(index, 3) * 50}ms` }}
       className="group card-accent cursor-pointer scroll-reveal"
       onClick={() => nav(`/recipe/${meal.idMeal}`)}
     >
@@ -17,9 +17,9 @@ export default function RecipeCard({ meal, index = 0, wide = false }) {
           src={meal.strMealThumb}
           alt={meal.strMeal}
           loading="lazy"
-          className="w-full h-full object-cover transition-all duration-700 group-hover:scale-105"
+          className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-surface-950 via-surface-950/20 to-transparent opacity-60 group-hover:opacity-80 transition-opacity duration-500" />
+        <div className="absolute inset-0 bg-gradient-to-t from-surface-950 via-surface-950/20 to-transparent opacity-60 group-hover:opacity-80 transition-opacity duration-300" />
 
         <div className="absolute top-3 left-3 flex gap-1.5">
           {meal.strCategory && (
