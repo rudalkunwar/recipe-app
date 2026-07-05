@@ -40,7 +40,7 @@ export default function Navbar() {
 
   return (
     <nav
-      className={`fixed inset-x-0 top-0 z-50 transition-all duration-500 ${
+      className={`fixed inset-x-0 top-0 z-50 transition-transform duration-300 ease-out ${
         visible ? "translate-y-0" : "-translate-y-full"
       } ${scrolled ? "bg-surface-950/85 backdrop-blur-xl shadow-[0_1px_0_rgba(255,255,255,0.04)]" : "bg-transparent"}`}
     >

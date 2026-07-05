@@ -135,8 +135,9 @@
 @layer utilities {
   .scroll-reveal {
     opacity: 0;
-    transform: translateY(30px);
-    transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    transform: translateY(20px);
+    will-change: opacity, transform;
+    transition: opacity 0.35s ease-out, transform 0.35s ease-out;
   }
 
   .scroll-reveal.revealed {
@@ -146,8 +147,9 @@
 
   .scroll-reveal-left {
     opacity: 0;
-    transform: translateX(-30px);
-    transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    transform: translateX(-20px);
+    will-change: opacity, transform;
+    transition: opacity 0.35s ease-out, transform 0.35s ease-out;
   }
 
   .scroll-reveal-left.revealed {
@@ -157,8 +159,9 @@
 
   .scroll-reveal-right {
     opacity: 0;
-    transform: translateX(30px);
-    transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    transform: translateX(20px);
+    will-change: opacity, transform;
+    transition: opacity 0.35s ease-out, transform 0.35s ease-out;
   }
 
   .scroll-reveal-right.revealed {
