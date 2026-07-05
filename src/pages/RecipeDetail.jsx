@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import { useParams, Link } from "react-router-dom";
-import { ArrowLeft, Globe, ChefHat, Tag, Check, Loader2, Youtube, ExternalLink, Salad } from "lucide-react";
+import { ArrowLeft, Globe, ChefHat, Tag, Check, Loader2, Youtube, ExternalLink, Salad, Share2 } from "lucide-react";
 import { getMealById } from "../utils/api";
 
 export default function RecipeDetail() {
@@ -39,6 +39,14 @@ export default function RecipeDetail() {
 
   const toggleIngredient = (key) => {
     setChecked((prev) => ({ ...prev, [key]: !prev[key] }));
+  };
+
+  const shareRecipe = () => {
+    if (navigator.share) {
+      navigator.share({ title: recipe.strMeal, url: window.location.href });
+    } else {
+      navigator.clipboard.writeText(window.location.href);
+    }
   };
 
   if (loading) {
@@ -204,6 +212,11 @@ export default function RecipeDetail() {
                 View Original Source
               </a>
             )}
+
+            <button onClick={shareRecipe} className="btn-ghost w-full">
+              <Share2 size={16} />
+              Share Recipe
+            </button>
           </div>
         </div>
       </div>
