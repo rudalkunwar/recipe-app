@@ -1,33 +1,24 @@
-import React from "react";
 import { Route, Routes } from "react-router-dom";
+import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
 import Home from "./pages/Home";
-import Navbar from "./components/nav/Navbar";
-import Recipe from "./pages/Recipe";
-import Description from "./pages/Description";
-import RecipeForm from "./pages/RecipeForm";
-import PrivacyPolicy from "./pages/PrivacyPolicy";
+import Recipes from "./pages/Recipes";
+import RecipeDetail from "./pages/RecipeDetail";
 import About from "./pages/About";
-import Footer from "./components/nav/Footer";
-import GoToTop from "./component/GoToTop";
-import MessengerChat from "./component/MessengerChat";
 
-function App() {
+export default function App() {
   return (
-    <>
+    <div className="min-h-screen flex flex-col bg-surface-950">
       <Navbar />
-      <MessengerChat />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/recipe" element={<Recipe />} />
-        <Route path="/recipe/des/:id" element={<Description />} />
-        <Route path="/submitRecipe" element={<RecipeForm />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-      </Routes>
+      <main className="flex-1">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/recipes" element={<Recipes />} />
+          <Route path="/recipe/:id" element={<RecipeDetail />} />
+          <Route path="/about" element={<About />} />
+        </Routes>
+      </main>
       <Footer />
-      <GoToTop />
-    </>
+    </div>
   );
 }
-
-export default App;

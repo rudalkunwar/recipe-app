@@ -1,63 +1,70 @@
-import React from "react";
 import { Link } from "react-router-dom";
+import { ChefHat, Search, BookOpen, ArrowRight, Heart, Sparkles } from "lucide-react";
+import useScrollReveal from "../utils/useScrollReveal";
 
-function About() {
+const features = [
+  {
+    icon: Search,
+    title: "Smart Discovery",
+    desc: "Find meals by name, category, or cuisine. Our search helps you discover exactly what you're craving.",
+  },
+  {
+    icon: BookOpen,
+    title: "Clear Instructions",
+    desc: "Every recipe comes with step-by-step instructions and a complete ingredient list that you can check off.",
+  },
+  {
+    icon: ChefHat,
+    title: "World Cuisines",
+    desc: "Explore dishes from every corner of the globe — Italian, Mexican, Japanese, Indian, and more.",
+  },
+];
+
+function Reveal({ children, className = "" }) {
+  const ref = useScrollReveal();
+  return <div ref={ref} className={`scroll-reveal ${className}`}>{children}</div>;
+}
+
+export default function About() {
   return (
-    <div className="min-h-screen bg-slate-950 pt-20 text-slate-100">
-      <div className="mx-auto max-w-6xl px-4 py-10 sm:px-6 lg:px-8">
-        <section className="rounded-2xl border border-slate-800 bg-slate-900/60 p-8 shadow-xl">
-          <p className="mb-3 text-sm font-semibold uppercase tracking-[0.2em] text-blue-300">
-            About Recipe App
+    <div className="page-container">
+      <div className="content-container">
+        <Reveal className="max-w-3xl mx-auto text-center">
+          <span className="font-accent text-brand-400/80 text-[11px] font-semibold uppercase tracking-[0.25em] mb-4 block">
+            <Sparkles size={13} className="inline mr-1.5 text-brand-400/60" />
+            About
+          </span>
+          <h1 className="section-title">Cook confidently, discover constantly.</h1>
+          <p className="section-subtitle mx-auto">
+            Ember helps home cooks find inspiration fast. Explore curated dishes,
+            dive into detailed instructions, and discover meals that fit your taste.
           </p>
-          <h1 className="mb-4 text-3xl font-bold text-white md:text-4xl">
-            Cook confidently, discover constantly.
-          </h1>
-          <p className="max-w-3xl text-lg leading-relaxed text-slate-300">
-            Recipe App helps home cooks find inspiration fast. Explore curated dishes, dive into
-            detailed instructions, and discover meals that fit your taste, time, and comfort level.
-          </p>
-        </section>
+        </Reveal>
 
-        <section className="mt-10 grid gap-6 md:grid-cols-3">
-          {[
-            {
-              title: "Simple Discovery",
-              description: "Browse recipes quickly with a clean, distraction-free experience.",
-            },
-            {
-              title: "Reliable Guidance",
-              description: "Get clear recipe details so every step in the kitchen feels easier.",
-            },
-            {
-              title: "Built for Everyday Cooking",
-              description: "From quick weeknight meals to weekend experiments, find what fits.",
-            },
-          ].map(({ title, description }) => (
-            <article
-              key={title}
-              className="rounded-xl border border-slate-800 bg-slate-900 p-6 shadow-md"
-            >
-              <h2 className="mb-2 text-xl font-semibold text-blue-300">{title}</h2>
-              <p className="text-slate-300">{description}</p>
+        <Reveal className="mt-14 grid grid-cols-1 md:grid-cols-3 gap-5">
+          {features.map(({ icon: Icon, title, desc }) => (
+            <article key={title} className="card-accent p-6 sm:p-8 text-center group">
+              <div className="w-12 h-12 mx-auto rounded-xl bg-gradient-to-br from-brand-500/[0.12] to-brand-500/5 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                <Icon size={24} className="text-brand-400" />
+              </div>
+              <div className="mt-4 mb-3 mx-auto w-6 h-px bg-brand-500/30" />
+              <h3 className="text-xl font-display font-bold text-white">{title}</h3>
+              <p className="mt-2 text-surface-500 text-sm leading-relaxed">{desc}</p>
             </article>
           ))}
-        </section>
+        </Reveal>
 
-        <section className="mt-10 rounded-2xl border border-blue-500/30 bg-gradient-to-r from-blue-600/15 via-slate-900 to-indigo-600/10 p-8 text-center">
-          <h2 className="mb-3 text-2xl font-semibold text-white">Ready to find your next dish?</h2>
-          <p className="mb-6 text-slate-200">
-            Explore recipe ideas and turn ingredients you already have into something great.
+        <Reveal className="mt-14 card-accent-wine p-10 sm:p-14 text-center max-w-2xl mx-auto">
+          <Heart size={24} className="mx-auto text-brand-400/60 mb-3" />
+          <h2 className="text-2xl sm:text-3xl font-display font-bold text-white">Ready to find your next dish?</h2>
+          <p className="mt-3 text-surface-500">
+            Explore thousands of recipes and turn ingredients you already have into something great.
           </p>
-          <Link
-            to="/recipe"
-            className="inline-flex items-center rounded-full bg-blue-500 px-6 py-3 text-base font-semibold text-white transition hover:bg-blue-400"
-          >
-            Explore Recipes
+          <Link to="/recipes" className="btn-primary mt-6 inline-flex group">
+            Explore Recipes <ArrowRight size={16} className="group-hover:translate-x-0.5 transition-transform" />
           </Link>
-        </section>
+        </Reveal>
       </div>
     </div>
   );
 }
-
-export default About;
